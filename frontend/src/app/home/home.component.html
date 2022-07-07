@@ -1,0 +1,119 @@
+<!-- <carousel   style="z-index: 0 !important; margin-top: 4%;" 
+            [images]="feed"
+            [objectFit]="'cover'"
+            [cellWidth]="'100%'"
+            [height]="450"
+            
+            [autoplay]="true"
+            [dots]="true"
+            [loop]="true"
+            [counter]="true"
+            [cellsToShow]="1" >
+          </carousel> -->
+<carousel style="z-index: 0 !important; margin-top: 4%;" class="carousel-html-content" [objectFit]="'cover'"
+  [cellWidth]="'100%'" [height]="650" [autoplay]="true" [dots]="true" [loop]="true" [counter]="false" [cellsToShow]="1">
+  <div class="carousel-cell"
+    style="background-image: url(../../../assets/images/banner.png);   filter: grayscale(70%); text-align: center; padding-top: 80px;">
+    <h1 style="color: white; font-size: 120px;">Food Nation</h1>
+  </div>
+  <div class="carousel-cell"
+    style="background-image: url(../../../assets/images/banner1.jpg);   filter: grayscale(70%); padding: .8%;">
+    <h1 style="color: white; font-size: 140px;">Burger</h1>
+  </div>
+  <div class="carousel-cell"
+    style="background-image: url(../../../assets/images/banner2.jpg);   filter: grayscale(70%); padding: 1.5%;">
+    <h1 style="color: white; font-size: 140px;">Pizza</h1>
+  </div>
+  <div class="carousel-cell"
+    style="background-image: url(../../../assets/images/banner3.jpg);   filter: grayscale(70%); padding: 1.5%;">
+    <h1 style="color: white; font-size: 140px;">Fries</h1>
+  </div>
+  <div class="carousel-cell"
+    style="background-image: url(../../../assets/images/bannerKitchen2.png);   filter: grayscale(70%); padding: 1.5%;">
+    <h1 style="color: white; font-size: 140px;">Crispy</h1>
+  </div>
+  <div class="carousel-cell"
+    style="background-image: url(../../../assets/images/bannerKitchen.png);   filter: grayscale(70%); padding: 1.5%;">
+    <h1 style="color: white; font-size: 140px;">Pasta</h1>
+  </div>
+</carousel>
+
+<div class="container" #order id="order">
+
+
+  <div class="row">
+    <h1 style="margin-top: 6%;">Order Now</h1>
+    <mat-card class="example-card">
+
+      <img mat-card-image
+        src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&ixid=MXwxfDB8MXxhbGx8fHx8fHx8fA&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=500"
+        alt="Photo of a Shiba Inu">
+      <mat-card-content>
+        <p>
+          The Shiba Inu is th..
+        </p>
+        <p>
+          The Shiba Inu is th..
+        </p>
+        <h3>$150/-</h3>
+      </mat-card-content>
+
+      <button mat-raised-button color="warn">Primary</button>
+      <button mat-raised-button color="primary">Primary</button>
+    </mat-card>
+
+    <mat-card class="example-card">
+
+      <img mat-card-image
+        src="https://images.unsplash.com/photo-1593504049359-74330189a345?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY1NzAyMTUxNw&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=500"
+        alt="Photo of a Shiba Inu">
+      <mat-card-content>
+        <p>
+          The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+          A small,
+        </p>
+      </mat-card-content>
+
+    </mat-card>
+
+    <mat-card class="example-card">
+
+      <img mat-card-image
+        src="https://images.unsplash.com/photo-1616863858589-9e04f2728c86?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY1NzAyMTkwOQ&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=500"
+        alt="Photo of a Shiba Inu">
+      <mat-card-content>
+        <p>
+          The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+          A small,
+        </p>
+      </mat-card-content>
+
+    </mat-card>
+    <mat-card class="example-card">
+
+      <img mat-card-image
+        src="https://images.unsplash.com/photo-1518013431117-eb1465fa5752?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY1NzAyMjM0NQ&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=500"
+        alt="Photo of a Shiba Inu">
+      <mat-card-content>
+        <p>
+          The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+          A small,
+        </p>
+      </mat-card-content>
+
+    </mat-card>
+    <mat-card class="example-card">
+
+      <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+      <mat-card-content>
+        <p>
+          The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+          A small,
+        </p>
+      </mat-card-content>
+
+    </mat-card>
+  </div>
+
+
+</div>
