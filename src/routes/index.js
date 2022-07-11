@@ -4,7 +4,7 @@ const userRoute = require('./user.route');
 const dishRoute = require('./dish.route');
 const docsRoute = require('./docs.route');
 const productsRoute = require('./product.route');
-const venderRoute = require('./vender.route');
+
 
 
 const config = require('../config/config');
@@ -23,10 +23,7 @@ const defaultRoutes = [{
   path: '/dishs',   // base path for user routes
   route: dishRoute,
 },
-{
-  path: '/venders',   // base path for user routes
-  route: venderRoute,
-},
+
 {
   path: '/products',   // base path for user routes
   route: productsRoute,

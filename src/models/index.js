@@ -3,7 +3,7 @@
 module.exports.Token = require('./token.model');
 module.exports.User = require('./user.model');
 module.exports.Product = require('./product.model');
-module.exports.Vender = require('./vender.model');
+
 module.exports.Dish = require('./dish.model');
 
 

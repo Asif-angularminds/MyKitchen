@@ -8,48 +8,43 @@ const userSchema = mongoose.Schema(
   {
     name: {
       type: String,
-     
+
       trim: true,
     },
-
     firstName: {
       type: String,
-      
+
       trim: true,
     },
-
     lastName: {
       type: String,
-      
+
       trim: true,
     },
-
     mobile: {
       type: String,
-     
+
       trim: true,
     },
     photo: {
       type: String,
-      
+
       trim: true,
     },
     bio: {
       type: String,
-      
+
       trim: true,
     },
     dob: {
       type: String,
-     
+
       trim: true,
     },
     gender: {
       type: String,
-      
       trim: true,
     },
-
     saved:
       [
         {
@@ -57,16 +52,15 @@ const userSchema = mongoose.Schema(
             type: mongoose.Types.ObjectId,
             ref: "Product"
           },
-          
+
 
         }
 
       ],
-    
-    // _org: {
-    //   type: mongoose.Types.ObjectId,
-    //   ref: "organizations"
-    // },
+    shopName: {
+      type: String,
+      trim: true,
+    },
     email: {
       type: String,
       required: true,
@@ -91,15 +85,18 @@ const userSchema = mongoose.Schema(
       },
       private: true, // used by the private plugin
     },
-    // role: {
-    //   type: String,
-    //   enum: roles,
-    //   default: 'user',
-    // },
     isEmailVerified: {
       type: Boolean,
       default: false,
-    }
+    },
+    role: {
+      type: String,
+      trim: true,   
+    },
+    // _org: {
+    //   type: mongoose.Types.ObjectId,
+    //   ref: "organizations"
+    // },
   },
   {
     timestamps: true,

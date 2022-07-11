@@ -28,7 +28,7 @@ const getProducts = catchAsync(async (req, res) => {
   const result = await dishService.queryDishs(filter, {
     ...options,
       populate: [{
-      path: " _vender",
+      path: "_vender",
       select: "_id name photo firstName"
     }]
    });
