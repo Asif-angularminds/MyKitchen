@@ -33,7 +33,7 @@ const dishSchema = mongoose.Schema(
     },
     _vender: {
       type: mongoose.Types.ObjectId,
-      ref: "Vender"
+      ref: "User"
     },
     
 

@@ -7,6 +7,7 @@ const auth = require('../middlewares/auth');
 const router = express.Router();
 
 router.post('/register', validate(authValidation.register), authController.register);
+router.post('/registerVender', validate(authValidation.registerVender), authController.registerVender);
 router.post('/google', validate(authValidation.google), authController.google);
 router.post('/login', validate(authValidation.login), authController.login);
 router.post('/forgot-password', validate(authValidation.forgotPassword), authController.forgotPassword);

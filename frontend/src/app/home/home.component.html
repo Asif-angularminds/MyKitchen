@@ -37,82 +37,34 @@
     <h1 style="color: white; font-size: 140px;">Pasta</h1>
   </div>
 </carousel>
+ <div class="container" #order id="order">
 
-<div class="container" #order id="order">
 
-
-  <div class="row">
-    <h1 style="margin-top: 6%;">Order Now</h1>
-    <mat-card class="example-card">
-
-      <img mat-card-image
-        src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&ixid=MXwxfDB8MXxhbGx8fHx8fHx8fA&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=500"
-        alt="Photo of a Shiba Inu">
-      <mat-card-content>
-        <p>
-          The Shiba Inu is th..
-        </p>
-        <p>
-          The Shiba Inu is th..
-        </p>
-        <h3>$150/-</h3>
-      </mat-card-content>
-
-      <button mat-raised-button color="warn">Primary</button>
-      <button mat-raised-button color="primary">Primary</button>
-    </mat-card>
-
-    <mat-card class="example-card">
-
-      <img mat-card-image
-        src="https://images.unsplash.com/photo-1593504049359-74330189a345?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY1NzAyMTUxNw&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=500"
-        alt="Photo of a Shiba Inu">
-      <mat-card-content>
-        <p>
-          The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-          A small,
-        </p>
-      </mat-card-content>
-
-    </mat-card>
-
-    <mat-card class="example-card">
-
-      <img mat-card-image
-        src="https://images.unsplash.com/photo-1616863858589-9e04f2728c86?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY1NzAyMTkwOQ&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=500"
-        alt="Photo of a Shiba Inu">
-      <mat-card-content>
-        <p>
-          The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-          A small,
-        </p>
-      </mat-card-content>
-
-    </mat-card>
-    <mat-card class="example-card">
-
-      <img mat-card-image
-        src="https://images.unsplash.com/photo-1518013431117-eb1465fa5752?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY1NzAyMjM0NQ&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=500"
-        alt="Photo of a Shiba Inu">
-      <mat-card-content>
-        <p>
-          The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-          A small,
-        </p>
-      </mat-card-content>
-
-    </mat-card>
-    <mat-card class="example-card">
-
-      <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-      <mat-card-content>
-        <p>
-          The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-          A small,
-        </p>
-      </mat-card-content>
-
-    </mat-card>
+    <div class="row">
+     <h1 style="margin-top: 6%;">Order Now</h1>
+     <ng-container *ngFor="let dish of dishs; index as i">
+     <mat-card class="example-card">
+  
+       <img mat-card-image
+         src={{dish.photo[0]?.path}}
+         alt="Photo of a Shiba Inu">
+       <mat-card-content>
+         <h2>
+           {{dish.name}}
+         </h2>
+         <p>
+           {{dish.description}}
+         </p>
+         <h3>${{dish.price}}/-</h3>
+       </mat-card-content>
+  
+       <button mat-raised-button color="warn"><mat-icon>remove_red_eye</mat-icon></button>
+       <button mat-raised-button color="primary" (click)="addToCart(dish)"><mat-icon>add_shopping_cart</mat-icon></button>
+     </mat-card>
+  
+    
+    
+   </ng-container>
   </div>
 
 

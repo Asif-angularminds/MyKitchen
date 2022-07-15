@@ -18,6 +18,7 @@ import { ViewCommentComponent } from '../view-comment/view-comment.component';
 
 export class HomeComponent implements OnInit {
   feed:any[]=[]
+  dishs:any[]=[]
   imgUrl:any
   imgIterate:number[]=[]
   currentUser:any;
@@ -25,7 +26,13 @@ export class HomeComponent implements OnInit {
 
     @ViewChild("order") order!: HTMLElement;
   ngOnInit(): void {
-
+this.userService.getDish().subscribe(data=>{
+  console.log(data.results);
+  this.dishs=data.results;
+  this.dishs.forEach((a: any) => {
+    Object.assign(a, { quantity: 1, total: a.price });
+  });
+})
     this.userService.getMessage().subscribe(data=>{
 if(data=='order'){
  let element = document.getElementById('order') as HTMLElement;
@@ -70,4 +77,21 @@ if(data=='home'){
     
     el.scrollIntoView({behavior: 'smooth'});
 }
+
+addToCart(dish:any){
+  let a:any[]=[]
+  a=JSON.parse(localStorage.getItem("order")!);
+   (a==null)?a=[]:"";
+  
+   
+   (a.filter((obj)=>JSON.stringify(obj._id)==JSON.stringify(dish._id)).length>0)?
+a.filter((obj)=>JSON.stringify(obj._id)==JSON.stringify(dish._id)?obj.quantity++:""):a.push(dish);
+ 
+   
+     
+  localStorage.setItem("order",JSON.stringify(a))
+  this.userService.sendMessage("order")
+
 }
+}
+ 

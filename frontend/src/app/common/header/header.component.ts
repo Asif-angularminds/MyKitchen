@@ -17,11 +17,14 @@ export class HeaderComponent implements OnInit {
   constructor(public dialog: MatDialog,private userService:UserService,private router:Router) { }
 currrntUser:any
 imageUrl=""
+order:number=0
 nav:any
   ngOnInit(): void {
   this.nav=this.router
-
-   this.userService.getMessage().subscribe(data=>{
+  if(localStorage.getItem("order"))
+  this.order=JSON.parse(localStorage.getItem("order")!).length
+     this.userService.getMessage().subscribe(data=>{
+    if(data=="order")this.order=JSON.parse(localStorage.getItem("order")!).length
   
     if(data=='true')this.ngOnInit();
 

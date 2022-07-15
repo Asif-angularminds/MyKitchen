@@ -7,9 +7,21 @@ const register = {
     password: Joi.string().required().custom(password),
     firstName: Joi.string().required(),
     lastName: Joi.string().required(),
-    role:Joi.string().required(),
+    role:Joi.string(),
     name:Joi.string(),
     // company: Joi.string().required()
+  }),
+};
+
+const registerVender = {
+  body: Joi.object().keys({
+    email: Joi.string().required().email(),
+    password: Joi.string().required().custom(password),
+    firstName: Joi.string().required(),
+    lastName: Joi.string().required(),
+    role:Joi.string(),
+    name:Joi.string(),
+    company: Joi.string().required()
   }),
 };
 const google = {
@@ -59,6 +71,7 @@ const verifyEmail = {
 
 module.exports = {
   register,
+  registerVender,
   google,
   login,
   logout,

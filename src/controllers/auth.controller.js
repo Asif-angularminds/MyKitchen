@@ -14,6 +14,7 @@ const register = catchAsync(async (req, res) => {
     user = await userService.createUser({
       
       ...req.body,
+      role:"user",
       name : req.body.firstName+" "+req.body.lastName
     });
   } catch (e) {
@@ -33,6 +34,40 @@ const register = catchAsync(async (req, res) => {
     expires
   });
 });
+
+
+
+const registerVender = catchAsync(async (req, res) => {
+  // const org = await userService.createOrg(req.body);
+  let user;
+  try {
+    user = await userService.createUser({
+      
+      ...req.body,
+      role:"vender",
+      name : req.body.firstName+" "+req.body.lastName
+    });
+  } catch (e) {
+    // await org.remove();
+    throw e;
+  }
+ 
+  // user = await user.populate("_org", "name email");
+
+  const {
+    token,
+    expires
+  } = await tokenService.generateAuthTokens(user);
+  res.status(httpStatus.CREATED).send({
+    user,
+    token,
+    expires
+  });
+});
+
+
+
+
 const google = catchAsync(async (req, res) => {
   // const org = await userService.createOrg(req.body);
   let user;
@@ -66,7 +101,7 @@ const login = catchAsync(async (req, res) => {
     password
   } = req.body;
   const user = await authService.loginUserWithEmailAndPassword(email, password);
-  const {
+    const {
     token,
     expires
   } = await tokenService.generateAuthTokens(user);
@@ -111,5 +146,6 @@ module.exports = {
   resetPassword,
   sendVerificationEmail,
   verifyEmail,
+  registerVender,
   self
 };

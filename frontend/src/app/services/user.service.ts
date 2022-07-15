@@ -6,11 +6,12 @@ import { Observable, Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class UserService  {
-  baseUrl: any = "http://192.168.0.120:8081/"
+  baseUrl: any = "http://localhost:8081/"
   imageUrl: string = "http://192.168.0.120:8081/images/"
 
   authUrl:any="auth"
   userUrl:any="users"
+  dishUrl:any="dishs"
 
   feedUrl:any="products"
   // Header:any={headers:{"":  JSON.parse(localStorage.getItem("token")!)}}
@@ -65,6 +66,13 @@ sendMail(token:any){
 verifyMail(token:any){
   return this.http.post<any>(this.baseUrl+this.authUrl+"/verify-email?token="+token,{})
 }
+
+// *********************************************************************************************************
+//                                    DISH API
+// *********************************************************************************************************
+getDish(){
+  return this.http.get<any>(this.baseUrl+this.dishUrl+"?sortBy=_id:desc&limit=50")
+ }
 
 
 // *********************************************************************************************************

@@ -16,7 +16,9 @@ import { ViewlikeComponent } from '../viewlike/viewlike.component';
 })
 export class ViewCommentComponent implements OnInit {
   
-  constructor(public dialog: MatDialog,public dialogRef: MatDialogRef<HomeComponent>, public dialogRef1: MatDialogRef<PostSavedComponent>,@Inject(MAT_DIALOG_DATA) public feeds: {name: any}, private cf: ChangeDetectorRef,private formBuilder:FormBuilder,private service:UserService,private router:Router) { }
+  constructor(public dialog: MatDialog,public dialogRef: MatDialogRef<HomeComponent>,
+     public dialogRef1: MatDialogRef<PostSavedComponent>,
+     @Inject(MAT_DIALOG_DATA) public feeds: {name: any}, private cf: ChangeDetectorRef,private formBuilder:FormBuilder,private service:UserService,private router:Router) { }
 comment:any;
   imgBaseUrl=""
 

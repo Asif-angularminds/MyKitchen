@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AddDishComponent } from './add-dish/add-dish.component';
 import { FeedComponent } from './feed/feed.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
@@ -15,7 +16,8 @@ import { VerifyEmailComponent } from './verify-email/verify-email.component';
 const routes: Routes = [
   { path: '', component: HomeComponent,canActivate:[AuthGuard] }, 
   { path: 'feed', component: FeedComponent,canActivate:[AuthGuard] }, 
-  { path: 'savedPost', component: PostSavedComponent,canActivate:[AuthGuard] },   
+  { path: 'savedPost', component: PostSavedComponent,canActivate:[AuthGuard] }, 
+  { path: 'dish', component: AddDishComponent,canActivate:[AuthGuard] },   
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignUpComponent },
   { path: 'reset-password', component: SetNewPasswordComponent },

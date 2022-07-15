@@ -54,6 +54,14 @@ import { ToastrModule } from 'ngx-toastr';
 import { NgxSkeletonLoaderModule } from "ngx-skeleton-loader";
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { FeedComponent } from './feed/feed.component';
+// import { AddDishComponent } from './add-dish/add-dish.component';
+import {MatTableModule} from '@angular/material/table';
+import { AddDishComponent } from './add-dish/add-dish.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
+
+
+
 @NgModule({
   declarations: [
   
@@ -73,6 +81,9 @@ import { FeedComponent } from './feed/feed.component';
       ForgotPasswordComponent,
       VerifyEmailComponent,
       FeedComponent,
+      AddDishComponent,
+      // AddDishComponent,
+      
   
     ],
   
@@ -84,6 +95,7 @@ import { FeedComponent } from './feed/feed.component';
     MatGridListModule,
     NgxIntlTelInputModule,
     MatProgressBarModule,
+    MatTableModule,
     NgxEmojiPickerModule,
     HttpClientModule,
     MatRadioModule,
@@ -98,6 +110,7 @@ import { FeedComponent } from './feed/feed.component';
     MatIconModule,
     MatNativeDateModule,
     MatGridListModule,
+    
     SwiperModule,
     MatInputModule,
     MatDatepickerModule,
@@ -109,12 +122,15 @@ import { FeedComponent } from './feed/feed.component';
     MatCarouselModule.forRoot(),
     IgxCarouselModule,
 	IgxSliderModule,
+  
   BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(),
     NgxSkeletonLoaderModule.forRoot(),
     IvyCarouselModule,
     GooglePlaceModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    MatPaginatorModule,
+    MatSortModule,
   
   ],
   providers: [
