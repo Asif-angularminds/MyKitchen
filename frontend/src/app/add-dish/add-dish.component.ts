@@ -8,7 +8,10 @@ import { MatTableDataSource } from '@angular/material/table';
   templateUrl: './add-dish.component.html',
   styleUrls: ['./add-dish.component.scss']
 })
-export class AddDishComponent implements AfterViewInit {
+export class AddDishComponent implements AfterViewInit,OnInit {
+  ngOnInit(){
+   
+  }
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 

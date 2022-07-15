@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AddDishComponent } from './add-dish/add-dish.component';
+import { AddToCartComponent } from './add-to-cart/add-to-cart.component';
 import { FeedComponent } from './feed/feed.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
@@ -17,6 +18,8 @@ const routes: Routes = [
   { path: '', component: HomeComponent,canActivate:[AuthGuard] }, 
   { path: 'feed', component: FeedComponent,canActivate:[AuthGuard] }, 
   { path: 'savedPost', component: PostSavedComponent,canActivate:[AuthGuard] }, 
+  { path: 'addToCart', component: AddToCartComponent,canActivate:[AuthGuard] }, 
+
   { path: 'dish', component: AddDishComponent,canActivate:[AuthGuard] },   
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignUpComponent },

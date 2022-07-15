@@ -86,6 +86,9 @@ addToCart(dish:any){
    
    (a.filter((obj)=>JSON.stringify(obj._id)==JSON.stringify(dish._id)).length>0)?
 a.filter((obj)=>JSON.stringify(obj._id)==JSON.stringify(dish._id)?obj.quantity++:""):a.push(dish);
+
+(a.filter((obj)=>JSON.stringify(obj._id)==JSON.stringify(dish._id)).length>0)?
+a.filter((obj)=>JSON.stringify(obj._id)==JSON.stringify(dish._id)?obj.total=obj.quantity*obj.price:""):"";
  
    
      

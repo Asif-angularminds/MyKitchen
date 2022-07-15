@@ -63,7 +63,7 @@ nav:any
     });
   }
   openSavedPost(){
-    this.router.navigate(["savedPost"]);
+    this.router.navigate(["addToCart"]);
   
   }
   openhome(){

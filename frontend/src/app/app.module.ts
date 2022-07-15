@@ -59,6 +59,7 @@ import {MatTableModule} from '@angular/material/table';
 import { AddDishComponent } from './add-dish/add-dish.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
+import { AddToCartComponent } from './add-to-cart/add-to-cart.component';
 
 
 
@@ -82,6 +83,7 @@ import {MatSortModule} from '@angular/material/sort';
       VerifyEmailComponent,
       FeedComponent,
       AddDishComponent,
+      AddToCartComponent,
       // AddDishComponent,
       
   
