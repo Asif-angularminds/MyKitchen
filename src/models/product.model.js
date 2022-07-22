@@ -13,7 +13,7 @@ const productSchema = mongoose.Schema(
       trim: true,
     },
     location: {
-      type: String,     
+      type: String,
       trim: true,
     },
     _createdBy: {
@@ -81,7 +81,7 @@ const productSchema = mongoose.Schema(
                 }
 
               ],
-             
+
             date: {
               type: Date,
               default: Date.now()
@@ -90,9 +90,9 @@ const productSchema = mongoose.Schema(
           }
 
         ],
-        show:{
+        show: {
           type: Boolean,
-          default:false,
+          default: false,
         },
         date: {
           type: Date,

@@ -3,7 +3,7 @@
           <div style="display: flex; margin-top:5% !important; width: 100%;">
                     <mat-form-field style="margin-left:2%;" appearance="standard">
                               <mat-label>Filter</mat-label>
-                              <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+                              <input matInput (keyup)="applyFilter($event)" placeholder="search..." #input>
                             </mat-form-field>
                     <mat-paginator style="margin-left:50%;" [pageSizeOptions]="[5, 10, 20]"
                                    showFirstLastButtons 

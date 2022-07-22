@@ -5,4 +5,6 @@ module.exports.productController = require('./product.controller');
 
 module.exports.userController = require('./user.controller');
 module.exports.venderController = require('./vender.controller');
+module.exports.orderController = require('./order.controller');
+
 

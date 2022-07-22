@@ -43,6 +43,7 @@ const updateUser = {
       bio:Joi.string(),
       gender:Joi.string(),   
       dob:Joi.string(),
+      address:Joi.string().required(),
 
     })
     .min(1),

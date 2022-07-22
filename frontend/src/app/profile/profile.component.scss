@@ -6,6 +6,7 @@
 .flex{
    
     display: flex;
+    padding-bottom: 2px;
 }
 a{
     margin-left:22% !important;
@@ -37,8 +38,8 @@ img{
      
   
     }
-    mat-form-field{
-     
+    .mat-form-field{
+        line-height: 1;
     }
     mat-card-header{
       text-align: center;
@@ -86,3 +87,6 @@ img{
         
      
       }
+      .mat-form-field-appearance-outline .mat-form-field-wrapper {
+        margin: 0 0; 
+    }

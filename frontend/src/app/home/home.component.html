@@ -58,7 +58,7 @@
          <h3>${{dish.price}}/-</h3>
        </mat-card-content>
   
-       <button mat-raised-button color="warn"><mat-icon>remove_red_eye</mat-icon></button>
+       <button mat-raised-button color="warn" (click)="openDialog(dish)"><mat-icon>remove_red_eye</mat-icon></button>
        <button mat-raised-button color="primary" (click)="addToCart(dish)"><mat-icon>add_shopping_cart</mat-icon></button>
      </mat-card>
   

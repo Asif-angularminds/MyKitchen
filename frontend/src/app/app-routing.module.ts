@@ -11,6 +11,7 @@ import { PostSavedComponent } from './post-saved/post-saved.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AuthGuard } from './services/auth.guard';
 import { SetNewPasswordComponent } from './set-new-password/set-new-password.component';
+import { ShowOrdersToUserComponent } from './show-orders-to-user/show-orders-to-user.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { VerifyEmailComponent } from './verify-email/verify-email.component';
 
@@ -20,7 +21,9 @@ const routes: Routes = [
   { path: 'savedPost', component: PostSavedComponent,canActivate:[AuthGuard] }, 
   { path: 'addToCart', component: AddToCartComponent,canActivate:[AuthGuard] }, 
 
-  { path: 'dish', component: AddDishComponent,canActivate:[AuthGuard] },   
+  { path: 'dish', component: AddDishComponent,canActivate:[AuthGuard] },  
+  { path: 'showUserOrders', component: ShowOrdersToUserComponent,canActivate:[AuthGuard] },   
+
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignUpComponent },
   { path: 'reset-password', component: SetNewPasswordComponent },

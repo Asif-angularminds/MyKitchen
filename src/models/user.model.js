@@ -8,9 +8,9 @@ const userSchema = mongoose.Schema(
   {
     name: {
       type: String,
-
       trim: true,
     },
+    
     firstName: {
       type: String,
 
@@ -37,6 +37,11 @@ const userSchema = mongoose.Schema(
       trim: true,
     },
     dob: {
+      type: String,
+
+      trim: true,
+    },
+    address:{
       type: String,
 
       trim: true,

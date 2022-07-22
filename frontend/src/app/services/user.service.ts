@@ -12,6 +12,7 @@ export class UserService  {
   authUrl:any="auth"
   userUrl:any="users"
   dishUrl:any="dishs"
+  orderUrl:any="orders"
 
   feedUrl:any="products"
   // Header:any={headers:{"":  JSON.parse(localStorage.getItem("token")!)}}
@@ -73,8 +74,15 @@ verifyMail(token:any){
 getDish(){
   return this.http.get<any>(this.baseUrl+this.dishUrl+"?sortBy=_id:desc&limit=50")
  }
-
-
+// *********************************************************************************************************
+//                                    ORDER API
+// *********************************************************************************************************
+postOrder(body:any){
+  return this.http.post<any>(this.baseUrl+this.orderUrl+"/",body)
+}
+getOrder(){
+  return this.http.get<any>(this.baseUrl+this.orderUrl+"/");
+}
 // *********************************************************************************************************
 //                                    FEED API
 // *********************************************************************************************************
@@ -124,11 +132,15 @@ showReply(id:any,cId:any){
 //                                  subject
 // *********************************************************************************************************
 private subject = new Subject<any>();
+private subject1 = new Subject<any>();
+
 
   sendMessage(message: string) {
       this.subject.next(message);
   }
-
+  sendMessageToAddToCart(message: string) {
+    this.subject1.next(message);
+}
   // clearMessages() {
   //     this.subject.next();
   // }
@@ -136,4 +148,7 @@ private subject = new Subject<any>();
   getMessage(): Observable<any> {
       return this.subject.asObservable();
   }
+  getMessageToAddToCart():Observable<any> {
+    return this.subject1.asObservable();
+}
 }

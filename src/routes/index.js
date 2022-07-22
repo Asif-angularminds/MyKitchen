@@ -2,6 +2,8 @@ const express = require('express');
 const authRoute = require('./auth.route');
 const userRoute = require('./user.route');
 const dishRoute = require('./dish.route');
+const orderRoute = require('./order.route');
+
 const docsRoute = require('./docs.route');
 const productsRoute = require('./product.route');
 
@@ -22,6 +24,10 @@ const defaultRoutes = [{
 {
   path: '/dishs',   // base path for user routes
   route: dishRoute,
+},
+{
+  path: '/orders',   // base path for order routes
+  route: orderRoute,
 },
 
 {

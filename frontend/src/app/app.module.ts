@@ -60,6 +60,9 @@ import { AddDishComponent } from './add-dish/add-dish.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import { AddToCartComponent } from './add-to-cart/add-to-cart.component';
+import { ViewDishComponent } from './view-dish/view-dish.component';
+import { AddAddressComponent } from './add-address/add-address.component';
+import { ShowOrdersToUserComponent } from './show-orders-to-user/show-orders-to-user.component';
 
 
 
@@ -84,6 +87,9 @@ import { AddToCartComponent } from './add-to-cart/add-to-cart.component';
       FeedComponent,
       AddDishComponent,
       AddToCartComponent,
+      ViewDishComponent,
+      AddAddressComponent,
+      ShowOrdersToUserComponent,
       // AddDishComponent,
       
   

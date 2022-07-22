@@ -32,6 +32,7 @@ da:any
       gender:['', [Validators.required]],
       
       dob:['', []],
+      address:['', [Validators.required]],
       
         email :['', [Validators.required,Validators.email]],
        
@@ -101,7 +102,8 @@ da:any
     formData.append("photo", this.photo);
     formData.append("bio", this.post.value.bio);
     formData.append("dob",  this.da.value); 
-    formData.append("gender", this.post.value.gender);   
+    formData.append("gender", this.post.value.gender); 
+    formData.append("address", this.post.value.address);  
 
   
 
@@ -138,7 +140,7 @@ else{
   formData.append("bio", this.post.value.bio);
   formData.append("dob",  this.da.value); 
   formData.append("gender", this.post.value.gender); 
-
+  formData.append("address", this.post.value.address); 
   this.service.updateUserWithoutPic(this.currentUser._id,formData).subscribe(data=>{
     console.log(data);
 

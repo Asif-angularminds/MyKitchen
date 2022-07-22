@@ -77,24 +77,33 @@ if(data=='home'){
     
     el.scrollIntoView({behavior: 'smooth'});
 }
-
+ a:any[]=[]
 addToCart(dish:any){
-  let a:any[]=[]
-  a=JSON.parse(localStorage.getItem("order")!);
-   (a==null)?a=[]:"";
+  this.a=JSON.parse(localStorage.getItem("order")!);
+   (this.a==null)?this.a=[]:"";
   
    
-   (a.filter((obj)=>JSON.stringify(obj._id)==JSON.stringify(dish._id)).length>0)?
-a.filter((obj)=>JSON.stringify(obj._id)==JSON.stringify(dish._id)?obj.quantity++:""):a.push(dish);
+   (this.a.filter((obj)=>JSON.stringify(obj._id)==JSON.stringify(dish._id)).length>0)?
+this.a.filter((obj)=>JSON.stringify(obj._id)==JSON.stringify(dish._id)?obj.quantity++:""):this.a.push(dish);
 
-(a.filter((obj)=>JSON.stringify(obj._id)==JSON.stringify(dish._id)).length>0)?
-a.filter((obj)=>JSON.stringify(obj._id)==JSON.stringify(dish._id)?obj.total=obj.quantity*obj.price:""):"";
+(this.a.filter((obj)=>JSON.stringify(obj._id)==JSON.stringify(dish._id)).length>0)?
+this.a.filter((obj)=>JSON.stringify(obj._id)==JSON.stringify(dish._id)?obj.total=obj.quantity*obj.price:""):"";
  
    
      
-  localStorage.setItem("order",JSON.stringify(a))
+  localStorage.setItem("order",JSON.stringify(this.a))
   this.userService.sendMessage("order")
 
+}
+openDialog(feed:any) {
+  const dialogRef = this.dialog.open(ViewCommentComponent, {
+    data: { name: feed },
+    backdropClass: "bdrop"
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    console.log(`Dialog result: ${result}`);
+  });
 }
 }
  

@@ -24,13 +24,21 @@ nav:any
   if(localStorage.getItem("order"))
   this.order=JSON.parse(localStorage.getItem("order")!).length
      this.userService.getMessage().subscribe(data=>{
-    if(data=="order")this.order=JSON.parse(localStorage.getItem("order")!).length
+    if(data=="order"){
+      let a:any[]=JSON.parse(localStorage.getItem("order")!);
+
+      (a.filter(obj=>obj.quantity=="Total Amount(₹)").length>0)?this.order=JSON.parse(localStorage.getItem("order")!).length-1:this.order=JSON.parse(localStorage.getItem("order")!).length}
   
     if(data=='true')this.ngOnInit();
 
 });
+
     (localStorage.getItem("currentUser"))?this.currrntUser=JSON.parse(localStorage.getItem("currentUser")!):"";
     (this.currrntUser?.photo)?this.imageUrl=this.userService.imageUrl+this.currrntUser.photo:""
+
+    let a:any[]=JSON.parse(localStorage.getItem("order")!);
+
+    (a.filter(obj=>obj.quantity=="Total Amount(₹)").length>0)?this.order=JSON.parse(localStorage.getItem("order")!).length-1:this.order=JSON.parse(localStorage.getItem("order")!).length
 
 // this.userService.getOneUser(this.currrntUser._id).subscribe(data=>{
 
@@ -63,8 +71,10 @@ nav:any
     });
   }
   openSavedPost(){
-    this.router.navigate(["addToCart"]);
-  
+    this.router.navigate(["savedPost"]);  
+  }
+  openaddToCart(){
+    this.router.navigate(["addToCart"]);  
   }
   openhome(){
     this.userService.sendMessage("home");
@@ -82,7 +92,7 @@ nav:any
     this.router.navigate(["login"])
   }
  scrollOrderNow(){
-  this.userService.sendMessage("order");
+  this.router.navigate(['showUserOrders'])
  }
 
   }

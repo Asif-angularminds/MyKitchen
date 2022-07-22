@@ -1,31 +1,74 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-
+import { Route, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { AddAddressComponent } from '../add-address/add-address.component';
+import { UserService } from '../services/user.service';
+declare var Razorpay: any;
 @Component({
   selector: 'app-add-to-cart',
   templateUrl: './add-to-cart.component.html',
   styleUrls: ['./add-to-cart.component.scss']
 })
 
-export class AddToCartComponent implements AfterViewInit,OnInit {
-  array:any[]=[{finalTotal:0}];
-  ngOnInit(){
-    let arr:any[]=[]
-  arr=JSON.parse(localStorage.getItem("order")!)
-    for (let i = 0; i < arr.length; i++) {
-      this.array[0].finalTotal=this.array[0].finalTotal+arr[i].total      
-    }
-    
-   
+export class AddToCartComponent implements AfterViewInit, OnInit {
+
+  constructor(private router:Router, private toastr: ToastrService,public dialog: MatDialog, private service: UserService) { 
+  
   }
-  displayedColumns: string[] = ['symbol', 'name', 'weight','price','sub','quentity','add','total', 'buttons'];
-  displayedColumns1: string[] = ['total','buttons'];
+  // currentUser:any=[];
+   finalTotal: number=0; 
+   address=""
+  dataSource: any
+  arr: any[] = JSON.parse(localStorage.getItem("order")!);
+  ngOnInit() {
+
+// (localStorage.getItem("currentUser"))?this.currentUser=JSON.parse(localStorage.getItem("currentUser")!):""
+
+
+    this.service.getMessageToAddToCart().subscribe((data)=>{
+     this.address=data;     
+      this.paynow();
+     
+    })
+    for (let i = 0; i < this.arr.length; i++) {
+      if(this.arr[i].quantity!="Total Amount(₹)"){
+     this.finalTotal = this.finalTotal + this.arr[i].total
+    }
+    }
+  for (let i = 0; i < this.arr.length; i++) {
+    if(this.arr[i].quantity=="Total Amount(₹)")
+    {
+      if(i!=this.arr.length-1)
+      {
+      this.arr.splice(i,1);
+      this.arr.push({ "name": "", "photo": [{ "path": "" }], "description": "", "price": "", "quantity": "Total Amount(₹)", "total": this.finalTotal })
+      }
+    }
+      if(this.arr[i].quantity!="Total Amount(₹)" && i==this.arr.length-1 ){
+      this.arr.push({ "name": "", "photo": [{ "path": "" }], "description": "", "price": "", "quantity": "Total Amount(₹)", "total": this.finalTotal })
+
+      }
+    
+  }
+    // (this.arr.filter(obj=>obj.quantity=="Total Amount(₹)").length>0)?"":this.arr.push({ "name": "", "photo": [{ "path": "" }], "description": "", "price": "", "quantity": "Total Amount(₹)", "total": 0 });
+    localStorage.setItem('order', JSON.stringify(this.arr))
+       this.dataSource = new MatTableDataSource<any>(this.arr);
+
+    console.log(this.dataSource);
+
+
+  }
+  displayedColumns: string[] = ['symbol', 'name', 'weight', 'price', 'sub', 'quentity', 'add', 'total', 'buttons'];
+
+
+  dataNotFound = false;
+
 
  
-  dataSource = new MatTableDataSource<any>(JSON.parse(localStorage.getItem("order")!));
-  dataSource1 = new MatTableDataSource<any>(this.array);
 
   @ViewChild(MatPaginator) paginator !: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -34,6 +77,7 @@ export class AddToCartComponent implements AfterViewInit,OnInit {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
+ 
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -43,48 +87,162 @@ export class AddToCartComponent implements AfterViewInit,OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-sub(element:any){
-  let arr:any[]=[]
-  arr=JSON.parse(localStorage.getItem("order")!)
-  arr.filter(obj=>{
-    if(JSON.stringify(obj._id)==JSON.stringify(element._id)){
-      obj.quantity--;
-      obj.total=obj.quantity * obj.price;
-      this.array[0].finalTotal=this.array[0].finalTotal-obj.price;
+  sub(element: any) {
+   
+   
+    this.arr.filter(obj => {
+      if (JSON.stringify(obj._id) == JSON.stringify(element._id)) {
+        obj.quantity--;
+        obj.total = obj.quantity * obj.price;
+        this.finalTotal = this.finalTotal - obj.price;
+      }
+    });
+    this.arr[this.arr.length-1].total=this.finalTotal
+    
+    this.dataSource = new MatTableDataSource<any>(this.arr);
+    localStorage.setItem('order', JSON.stringify(this.arr))
+
+
+  }
+  add(element: any) {
+  
+    this.arr.filter(obj => {
+      if (JSON.stringify(obj._id) == JSON.stringify(element._id)) {
+        obj.quantity++;
+        obj.total = obj.quantity * obj.price;
+        this.finalTotal = this.finalTotal + JSON.parse(obj.price);
+      }
+    });
+    this.arr[this.arr.length-1].total=this.finalTotal
+    this.dataSource = new MatTableDataSource<any>(this.arr);
+    localStorage.setItem('order', JSON.stringify(this.arr))
+
+
+  }
+  delete(element: any) {
+    
+    this.arr = JSON.parse(localStorage.getItem("order")!)
+
+    this.finalTotal = this.finalTotal - (JSON.parse(element.price) * JSON.parse(element.quantity));
+
+    this.arr[this.arr.length-1].total=this.finalTotal
+    this.arr = this.arr.filter(obj => JSON.stringify(obj._id) != JSON.stringify(element._id));
+        
+    if(this.arr.length==1)this.arr=[]
+    this.dataSource = new MatTableDataSource<any>(this.arr);
+    localStorage.setItem('order', JSON.stringify(this.arr))
+    this.service.sendMessage('order');
+
+
+
+  }
+  proceed() {
+    let arr: any[] = []   
+    this.openDialog(arr)
+
+    // this.paynow()
+
+  }
+
+  openDialog(feed:any) {
+    const dialogRef = this.dialog.open(AddAddressComponent, {
+      data: { name: feed },
+      backdropClass: "bdrop"
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
+
+  message: any = "Not yet stared";
+  paymentId = "";
+  error = "";
+  title = 'angular-razorpay-intergration';
+
+
+  // rzp_live_BCuwa8w1sOWjPo
+  // rzp_test_50qaiXf4yBpYyG
+  options = {
+    "key": "rzp_test_50qaiXf4yBpYyG",
+    "amount": "2000",
+    "name": "Tushar Gandhile",
+    "description": "Web Development",
+    "image": "https://ca.slack-edge.com/T0B4MLUM9-U02U2KSF7BQ-2dca941a5ab5-512",
+    "order_id": "",
+    "handler": function (response: any) {
+      var event = new CustomEvent("payment.success",
+        {
+          detail: response,
+          bubbles: true,
+          cancelable: true
+        }
+      );
+      window.dispatchEvent(event);
+    },
+    "prefill": {
+      "name": "",
+      "email": "",
+      "contact": ""
+    },
+    "notes": {
+      "address": ""
+    },
+    "theme": {
+      "color": "#ff6600"
     }
-  })
-  
-  this.dataSource = new MatTableDataSource<any>(arr);
-  localStorage.setItem('order',JSON.stringify(arr))
- 
-  
-}
-add(element:any){
-  let arr:any[]=[]
-  arr=JSON.parse(localStorage.getItem("order")!)
-  arr.filter(obj=>{
-    if(JSON.stringify(obj._id)==JSON.stringify(element._id)){
-      obj.quantity++;
-      obj.total=obj.quantity * obj.price;
-      this.array[0].finalTotal=JSON.parse(this.array[0].finalTotal)+JSON.parse(obj.price);
+  };
+
+  paynow() {
+    //JSON.stringify(JSON.parse(this.array[0].finalTotal)*100)
+    this.paymentId = '';
+    this.error = '';
+    this.options.amount = JSON.stringify(this.finalTotal * 100); //paise
+    this.options.prefill.name = "Asif";
+    this.options.prefill.email = "asifsayyed1999@gmail.com";
+    this.options.prefill.contact = "9673778533";
+    var rzp1 = new Razorpay(this.options);
+    rzp1.open();
+    rzp1.on('payment.failed', function (response: any) {
+      //this.message = "Payment Failed";
+      // Todo - store this information in the server
+      console.log(response.error.code);
+      console.log(response.error.description);
+      console.log(response.error.source);
+      console.log(response.error.step);
+      console.log(response.error.reason);
+      console.log(response.error.metadata.order_id);
+      console.log(response.error.metadata.payment_id);
+      //this.error = response.error.reason;
     }
-  })
- 
-  this.dataSource = new MatTableDataSource<any>(arr);
-  localStorage.setItem('order',JSON.stringify(arr))
- 
+    );
+  }
+  @HostListener('window:payment.success', ['$event'])
+  onPaymentSuccess(event: any): void {
+    this.message = "Success Payment";
+    alert(this.message);
+    this.arr.pop()
+let order={
+  address:this.address,
+  razorpay_payment_id:event.detail.razorpay_payment_id,
+  finalTotal:""+this.finalTotal,
+  dishs:this.arr 
+
+}
+this.service.postOrder(order).subscribe(data=>{
+  console.log(data);
   
-}
-delete(element:any){
-  let arr:any[]=[]
-  arr=JSON.parse(localStorage.getItem("order")!)
- arr=arr.filter(obj=>JSON.stringify(obj._id)!=JSON.stringify(element._id))
-  this.dataSource = new MatTableDataSource<any>(arr);
-  localStorage.setItem('order',JSON.stringify(arr))
- 
-  
-}
-}
+})
+this.arr=[];
+   localStorage.setItem('order',JSON.stringify(this.arr));
+   this.router.navigate(["showUserOrders"])
+   this.service.sendMessage('order')
+    // console.log(order);
+
+
+  }
 
 
 
+}
