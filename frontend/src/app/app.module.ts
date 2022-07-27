@@ -29,7 +29,7 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {NgxIntlTelInputModule} from "ngx-intl-tel-input";
 import {NgxMatIntlTelInputModule} from "ngx-mat-intl-tel-input";
 import { MatCarouselModule } from 'ng-mat-carousel';
-
+import {MatTooltipModule} from '@angular/material/tooltip';
 import { InterceptorInterceptor } from './services/interceptor.interceptor';
 import { CommonModule } from '@angular/common';
 import { AddNewPostComponent } from './add-new-post/add-new-post.component';
@@ -60,10 +60,14 @@ import { AddDishComponent } from './add-dish/add-dish.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import { AddToCartComponent } from './add-to-cart/add-to-cart.component';
-import { ViewDishComponent } from './view-dish/view-dish.component';
+
 import { AddAddressComponent } from './add-address/add-address.component';
 import { ShowOrdersToUserComponent } from './show-orders-to-user/show-orders-to-user.component';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { ViewDishComponent } from './view-dish/view-dish.component';
+import { AddDishFormComponent } from './add-dish-form/add-dish-form.component';
 
 
 @NgModule({
@@ -90,6 +94,7 @@ import { ShowOrdersToUserComponent } from './show-orders-to-user/show-orders-to-
       ViewDishComponent,
       AddAddressComponent,
       ShowOrdersToUserComponent,
+      AddDishFormComponent,
       // AddDishComponent,
       
   
@@ -98,7 +103,10 @@ import { ShowOrdersToUserComponent } from './show-orders-to-user/show-orders-to-
   imports: [
     BrowserModule,
     MatBadgeModule,
+    MatSlideToggleModule,
+    MatButtonToggleModule,
     SocialLoginModule,
+    MatTooltipModule,
     PickerModule,
     MatGridListModule,
     NgxIntlTelInputModule,

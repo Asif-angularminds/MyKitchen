@@ -26,7 +26,7 @@ export class AddToCartComponent implements AfterViewInit, OnInit {
   arr: any[] = JSON.parse(localStorage.getItem("order")!);
   ngOnInit() {
 
-// (localStorage.getItem("currentUser"))?this.currentUser=JSON.parse(localStorage.getItem("currentUser")!):""
+(localStorage.getItem("order"))?"":this.arr=[]
 
 
     this.service.getMessageToAddToCart().subscribe((data)=>{
@@ -167,9 +167,9 @@ export class AddToCartComponent implements AfterViewInit, OnInit {
   options = {
     "key": "rzp_test_50qaiXf4yBpYyG",
     "amount": "2000",
-    "name": "Tushar Gandhile",
-    "description": "Web Development",
-    "image": "https://ca.slack-edge.com/T0B4MLUM9-U02U2KSF7BQ-2dca941a5ab5-512",
+    "name": "Asif Sayyed",
+    "description": "Vender",
+    "image": "https://ca.slack-edge.com/T0B4MLUM9-U02SFU3SS0K-c68b329728df-512",
     "order_id": "",
     "handler": function (response: any) {
       var event = new CustomEvent("payment.success",

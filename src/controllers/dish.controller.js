@@ -10,18 +10,18 @@ const Dish=require('../models/dish.model')
 const {productService,dishService} = require('../services');
 
 
-const createProduct = catchAsync(async (req, res) => {
+const createDish = catchAsync(async (req, res) => {
   
-  const product = await dishService.createProduct({   
+  const dish = await dishService.createProduct({   
     ...req.body,
     _vender:req.user._id,
     photo: req.files.map(({ filename, path }) => ({ filename, path:'http://localhost:8081/images/'+filename }))
   });
   console.log(req.files);
-  res.status(httpStatus.CREATED).send(product);
+  res.status(httpStatus.CREATED).send(dish);
 });
 
-const getProducts = catchAsync(async (req, res) => {
+const getDishs = catchAsync(async (req, res) => {
   // logger.info("good")
   const filter = pick(req.query, ['caption']);
   const options = pick(req.query, ['sortBy', 'limit', 'page']);
@@ -38,38 +38,47 @@ const getProducts = catchAsync(async (req, res) => {
 
 });
 
-const getProduct = catchAsync(async (req, res) => {
-  const product = await (await productService.getProductById(req.params.productId))
+const getDish = catchAsync(async (req, res) => {
+  const dish = await (await dishService.getDishById(req.params.dishId))
   .populate([{
-    path: "_createdBy comment._userId comment.reply._userId like._userId comment.like._userId comment.reply.like._userId",
+    path: "_vender",
     select: "_id name photo firstName"
   }]);
-  if (!product) {
+  if (!dish) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Product not found');
   }
 
-  res.send(product);
+  res.send(dish);
 });
 
-const updateProduct = catchAsync(async (req, res) => {
-  const product = await (await productService.updateProductById(req.params.productId, {   
+const updateDish = catchAsync(async (req, res) => {
+
+  if(req.files.length){    
+  
+  const dish = await (await dishService.updateDishById(req.params.dishId, {   
     ...req.body,
-    
-    photo: req.files.map(({ filename, path }) => ({ filename, path:'http://192.168.0.120:8080/images/'+filename }))
+     photo: req.files.map(({ filename, path }) => ({ filename, path:'http://localhost:8081/images/'+filename }))
   }))
     // .populate("_org", "_id name email");
-  res.send(product);
+    res.send(dish);
+  
+}
+
+else{
+  const dish = await (await dishService.updateDishById(req.params.dishId,req.body))
+  res.send(dish);
+}
 },{new:true});
 
 
 
-const deleteProduct = catchAsync(async (req, res) => {
-  await productService.deleteProductById(req.params.productId);
+const deleteDish = catchAsync(async (req, res) => {
+  await dishService.deleteDishById(req.params.dishId);
   res.status(httpStatus.NO_CONTENT).send();
 });
 
 const likeProduct = catchAsync(async (req, res) => {
-  const product = await (await productService.likeProduct(req.params.productId,req.user._id));
+  const product = await (await productService.likeProduct(req.params.dishId,req.user._id));
   res.send(product);
 });
 
@@ -80,13 +89,13 @@ const likeProduct = catchAsync(async (req, res) => {
 
 
 const commentProduct = catchAsync(async (req, res) => {
-  const product = await (await productService.commentProduct(req.params.productId,req.user._id,req.body))
+  const product = await (await productService.commentProduct(req.params.dishId,req.user._id,req.body))
     // .populate("_org", "_id name email");
   res.send(product);
 },{new:true});
 
 const showReplyProduct = catchAsync(async (req, res) => {
-  const product = await (await productService.showReplyProduct(req.params.productId,req.params.commentId,req.body))
+  const product = await (await productService.showReplyProduct(req.params.dishId,req.params.commentId,req.body))
     // .populate("_org", "_id name email");
   res.send(product);
 },{new:true});
@@ -94,32 +103,32 @@ const showReplyProduct = catchAsync(async (req, res) => {
 
 
 const replyProduct = catchAsync(async (req, res) => {
-  const product = await (await productService.replyProduct(req.params.productId,req.params.commentId,req.user._id,req.body))
+  const product = await (await productService.replyProduct(req.params.dishId,req.params.commentId,req.user._id,req.body))
     // .populate("_org", "_id name email");
   res.send(product);
 },{new:true});
 
 const likeComment = catchAsync(async (req, res) => {
-  const product = await (await productService.likeComment(req.params.productId,req.params.commentId,req.user._id))
+  const product = await (await productService.likeComment(req.params.dishId,req.params.commentId,req.user._id))
     // .populate("_org", "_id name email");
   res.send(product);
 },{new:true});
 
 const likeReply = catchAsync(async (req, res) => {
-  const product = await (await productService.likeReply(req.params.productId,req.params.commentId,req.params.replyId,req.user._id))
+  const product = await (await productService.likeReply(req.params.dishId,req.params.commentId,req.params.replyId,req.user._id))
     // .populate("_org", "_id name email");
   res.send(product);
 },{new:true});
 
 
 module.exports = {
-  createProduct,
+  createDish,
   replyProduct,
   commentProduct,
-  getProducts,
-  getProduct,
-  updateProduct,
-  deleteProduct,
+  getDishs,
+  getDish,
+  updateDish,
+  deleteDish,
   showReplyProduct,
   likeComment,
   likeReply,

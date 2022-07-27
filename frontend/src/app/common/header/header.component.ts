@@ -24,6 +24,7 @@ nav:any
   if(localStorage.getItem("order"))
   this.order=JSON.parse(localStorage.getItem("order")!).length
      this.userService.getMessage().subscribe(data=>{
+        
     if(data=="order"){
       let a:any[]=JSON.parse(localStorage.getItem("order")!);
 

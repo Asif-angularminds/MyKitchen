@@ -17,18 +17,19 @@ router.use(auth());
 // Routes: get users, create user
 router
   .route('/')
-  .post(imageUpload.multipalImage, validate(dishValidation.createProduct), dishController.createProduct)
-  .get( dishController.getProducts);
+  .post(imageUpload.multipalImage, validate(dishValidation.createDish), dishController.createDish)
+  .get( validate(dishValidation.getDishs),  dishController.getDishs);
 
 
 // validate(userValidation.getUsers),
 
 // Routes: get one user, update user, delete user
 router
-  .route('/:productId')
-  .get(validate(productValidation.getProduct), productController.getProduct)
-  .patch(imageUpload.multipalImage, validate(productValidation.updateProduct), productController.updateProduct)
-  .delete(validate(productValidation.deleteProduct), productController.deleteProduct);
+  .route('/:dishId')
+  .get(validate(dishValidation.getDish), dishController.getDish)
+  .patch(imageUpload.multipalImage, validate(dishValidation.updateDish), dishController.updateDish)
+  .put(imageUpload.multipalImage, validate(dishValidation.updateDish), dishController.updateDish)
+  .delete(validate(dishValidation.deleteDish), dishController.deleteDish);
 
 
   //like 

@@ -21,7 +21,7 @@ export class ViewDishComponent implements OnInit  {
      @Inject(MAT_DIALOG_DATA) public feeds: {name: any}, private cf: ChangeDetectorRef,private formBuilder:FormBuilder,private service:UserService,private router:Router) { }
 comment:any;
   imgBaseUrl=""
-
+qty=1
   urls: any[] = [];
   currentUser:any=[];
   savePost1=false

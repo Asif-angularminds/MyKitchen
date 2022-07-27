@@ -74,6 +74,9 @@ verifyMail(token:any){
 getDish(){
   return this.http.get<any>(this.baseUrl+this.dishUrl+"?sortBy=_id:desc&limit=50")
  }
+ postDish(body:any){
+  return this.http.post<any>(this.baseUrl+this.dishUrl+"/",body)
+}
 // *********************************************************************************************************
 //                                    ORDER API
 // *********************************************************************************************************
@@ -81,7 +84,7 @@ postOrder(body:any){
   return this.http.post<any>(this.baseUrl+this.orderUrl+"/",body)
 }
 getOrder(){
-  return this.http.get<any>(this.baseUrl+this.orderUrl+"/");
+  return this.http.get<any>(this.baseUrl+this.orderUrl+"?sortBy=_id:desc&limit=50");
 }
 // *********************************************************************************************************
 //                                    FEED API

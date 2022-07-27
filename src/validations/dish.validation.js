@@ -1,7 +1,7 @@
 const Joi = require('joi');
 const { password, objectId } = require('./custom.validation');
 
-const createProduct = {
+const createDish = {
   body: Joi.object().keys({
     name: Joi.string().required(),
     photo: Joi.string(),
@@ -13,7 +13,7 @@ const createProduct = {
   }),
 };
 
-const getProducts = {
+const getDishs = {
   query: Joi.object().keys({
 
     sortBy: Joi.string(),
@@ -22,23 +22,25 @@ const getProducts = {
   }),
 };
 
-const getProduct = {
+const getDish = {
   params: Joi.object().keys({
-    productId: Joi.string().custom(objectId),
+    dishId: Joi.string().custom(objectId),
   }),
 };
 
-const updateProduct = {
+const updateDish = {
   params: Joi.object().keys({
-    productId: Joi.required().custom(objectId),
+    dishId: Joi.required().custom(objectId),
   }),
   body: Joi.object()
     .keys({
-      caption: Joi.string().required(), 
+      name: Joi.string().required(),
     photo: Joi.string(),
-    like: Joi.string(),
-    comment: Joi.string(),
-    })
+    price: Joi.string(),
+    status: Joi.boolean(),
+    description:Joi.string(),
+    type: Joi.string(), 
+       })
     .min(1),
 };
 
@@ -54,9 +56,9 @@ const updateOrg = {
     .min(1),
 };
 
-const deleteProduct  = {
+const deleteDish  = {
   params: Joi.object().keys({
-    productId: Joi.string().custom(objectId),
+    dishId: Joi.string().custom(objectId),
   }),
 };
 const likeProduct  = {
@@ -112,15 +114,15 @@ const likeReply  = {
   .min(1),
 };
 module.exports = {
-  createProduct,
+  createDish,
   commentProduct,
-  getProducts,
+  getDishs,
   likeReply,
-  getProduct,
-  updateProduct,
+  getDish,
+  updateDish,
   replyProduct,
   updateOrg,
-  deleteProduct,
+  deleteDish,
   likeComment,
   likeProduct,
   showReplyProduct,

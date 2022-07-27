@@ -12,7 +12,7 @@ const ApiError = require('../utils/ApiError')
  * @param {Object} productBody
  * @returns {Promise<User>}
  */
-const createProduct = async (productBody) => {
+const createDish = async (productBody) => {
 // logger.info("good")
   return Dish.create(productBody);
 };
@@ -36,8 +36,8 @@ const queryDishs = async (filter, options) => {
  * @param {ObjectId} id
  * @returns {Promise<User>}
  */
-const getProductById = async (id) => {
-  return Product.findById(id);
+const getDishById = async (id) => {
+  return Dish.findById(id);
 };
 
 
@@ -47,35 +47,35 @@ const getProductById = async (id) => {
  * @param {Object} updateBody
  * @returns {Promise<User>}
  */
-const updateProductById = async (productId, productBody) => {
-  const product = await getProductById(productId);
-  if (!product) {
+const updateDishById = async (dishId, productBody) => {
+  const dish = await getDishById(dishId);
+  if (!dish) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Product not found');
   }
 
-  Object.assign(product, productBody);
-  await product.save();
-  return product;
+  Object.assign(dish, productBody);
+  await dish.save();
+  return dish;
 };
 
 
 
 /**
  * Delete user by id
- * @param {ObjectId} productId
+ * @param {ObjectId} dishId
  * @returns {Promise<User>}
  */
-const deleteProductById = async (productId) => {
-  const product = await getProductById(productId);
+const deleteDishById = async (dishId) => {
+  const dish = await getDishById(dishId);
 
-  if (!product) {
+  if (!dish) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Product not found');
   }
-  await product.delete();
-  return product;
+  await dish.delete();
+  return dish;
 };
-const likeProduct = async (productId,userId) => {
-  const product = await getProductById(productId);
+const likeProduct = async (dishId,userId) => {
+  const product = await getProductById(dishId);
   if (!product) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Product not found');
   }
@@ -87,8 +87,8 @@ const likeProduct = async (productId,userId) => {
   return product;
 };
 
-const commentProduct = async (productId,userId,productBody) => {
-  const product = await getProductById(productId);
+const commentProduct = async (dishId,userId,productBody) => {
+  const product = await getProductById(dishId);
   if (!product) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Product not found');
   }
@@ -99,8 +99,8 @@ const commentProduct = async (productId,userId,productBody) => {
   return product;
 };
 
-const showReplyProduct = async (productId,commentId,productBody) => {
-  const product = await getProductById(productId);
+const showReplyProduct = async (dishId,commentId,productBody) => {
+  const product = await getProductById(dishId);
   if (!product) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Product not found');
   }
@@ -117,8 +117,8 @@ const showReplyProduct = async (productId,commentId,productBody) => {
 };
 
 
-const replyProduct = async (productId,commentId,userId,productBody) => {
-  const product = await getProductById(productId);
+const replyProduct = async (dishId,commentId,userId,productBody) => {
+  const product = await getProductById(dishId);
   if (!product) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Product not found');
   }
@@ -132,8 +132,8 @@ const replyProduct = async (productId,commentId,userId,productBody) => {
   return product;
 };
 
-const likeComment = async (productId,commentId,userId,) => {
-  const product = await getProductById(productId);
+const likeComment = async (dishId,commentId,userId,) => {
+  const product = await getProductById(dishId);
   if (!product) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Product not found');
   }
@@ -150,8 +150,8 @@ const likeComment = async (productId,commentId,userId,) => {
 };
 
 
-const likeReply = async (productId,commentId,replyId,userId) => {
-  const product = await getProductById(productId);
+const likeReply = async (dishId,commentId,replyId,userId) => {
+  const product = await getProductById(dishId);
   if (!product) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Product not found');
   }
@@ -175,12 +175,12 @@ module.exports = {
   likeComment,
   likeReply,
   replyProduct,
-  createProduct,
+  createDish,
   likeProduct,
   queryDishs,
-  getProductById,
+  getDishById,
 
-  updateProductById,
+  updateDishById,
   showReplyProduct,
-  deleteProductById,
+  deleteDishById,
 };

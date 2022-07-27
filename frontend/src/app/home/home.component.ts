@@ -1,10 +1,13 @@
 import { Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ThemePalette } from '@angular/material/core';
 import { MatDialog } from '@angular/material/dialog';
 import { json } from 'express';
 import { ToastrService } from 'ngx-toastr';
+import { ViewDishComponent } from '../view-dish/view-dish.component';
 import { ProfileComponent } from '../profile/profile.component';
 import { UserService } from '../services/user.service';
 import { ViewCommentComponent } from '../view-comment/view-comment.component';
+
 
 
 @Component({
@@ -20,8 +23,10 @@ export class HomeComponent implements OnInit {
   feed:any[]=[]
   dishs:any[]=[]
   imgUrl:any
+  color: ThemePalette="accent"
   imgIterate:number[]=[]
   currentUser:any;
+  temp:any[]=[]
     constructor(public dialog: MatDialog,private toastr: ToastrService,private userService:UserService) { }
 
     @ViewChild("order") order!: HTMLElement;
@@ -32,6 +37,7 @@ this.userService.getDish().subscribe(data=>{
   this.dishs.forEach((a: any) => {
     Object.assign(a, { quantity: 1, total: a.price });
   });
+  this.temp=this.dishs
 })
     this.userService.getMessage().subscribe(data=>{
 if(data=='order'){
@@ -96,7 +102,7 @@ this.a.filter((obj)=>JSON.stringify(obj._id)==JSON.stringify(dish._id)?obj.total
 
 }
 openDialog(feed:any) {
-  const dialogRef = this.dialog.open(ViewCommentComponent, {
+  const dialogRef = this.dialog.open(ViewDishComponent, {
     data: { name: feed },
     backdropClass: "bdrop"
   });
@@ -104,6 +110,17 @@ openDialog(feed:any) {
   dialogRef.afterClosed().subscribe(result => {
     console.log(`Dialog result: ${result}`);
   });
+}
+filter(event:any){
+  console.log(event.value);
+  if(event.value=='veg')
+  {
+    this.dishs=this.temp.filter(res=>res.type==event.value);
+ }
+  else if(event.value=='non-veg')
+  this.dishs=this.temp.filter(res=>res.type==event.value);
+  else
+  this.dishs=this.temp;
 }
 }
  

@@ -67,13 +67,29 @@ const getUser = catchAsync(async (req, res) => {
 });
 
 const updateUser = catchAsync(async (req, res) => {
-  const user = await (await userService.updateUserById(req.params.userId, {   
-    ...req.body, 
-    name:req.body.firstName+" "+req.body.lastName,   
-    photo: req.file.filename
-  }))
-    
-  res.send(user);
+  console.log(req.file);
+  if (req.file) {
+    const user = await (await userService.updateUserById(req.params.userId, {   
+      ...req.body, 
+      name:req.body.firstName+" "+req.body.lastName,   
+      photo: req.file.filename
+    }))
+      
+    res.send(user);
+  }
+  else{
+    const users = await userService.getUserById(req.params.userId);
+    const user = await (await userService.updateUserById(req.params.userId,   
+      {...req.body,
+        name:req.body.firstName+" "+req.body.lastName,
+        photo:users.photo
+      
+      } 
+     ))
+      
+    res.send(user);
+  }
+  
 });
 
 const updateUserWithoutPic = catchAsync(async (req, res) => {

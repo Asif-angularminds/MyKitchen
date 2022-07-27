@@ -22,10 +22,11 @@ export class ShowOrdersToUserComponent implements AfterViewInit,OnInit {
     (localStorage.getItem("currentUser"))?this.currrntUser=JSON.parse(localStorage.getItem("currentUser")!):"";
    this.userService.getOrder().subscribe(data=>{
      data=data.results.filter((obj:any)=>obj._user._id==this.currrntUser._id);
-     this.orders=data.reverse();
+     this.orders=data;
      console.log(this.orders);
    this.dataSource = new MatTableDataSource<any>(this.orders);
-
+   this.dataSource.paginator = this.paginator;
+   this.dataSource.sort = this.sort;
    })
 
   

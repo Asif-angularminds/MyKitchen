@@ -87,7 +87,7 @@ da:any
   }
   submitform(){
     console.log(this.photo)
-    if(this.photo){
+    
     
     console.log(this.post.value,this.photo)
 
@@ -126,40 +126,8 @@ da:any
     })
 
 
-  }
-else{
-  const formData:any=new FormData();
-  let a=[];
-  a=this.post.value.name.split(" ")
   
-  formData.append("firstName", a[0]);
-  formData.append("lastName", a[1]);
-  formData.append("email", this.post.value.email);
-  formData.append("mobile", this.post.value.mobile.number);
 
-  formData.append("bio", this.post.value.bio);
-  formData.append("dob",  this.da.value); 
-  formData.append("gender", this.post.value.gender); 
-  formData.append("address", this.post.value.address); 
-  this.service.updateUserWithoutPic(this.currentUser._id,formData).subscribe(data=>{
-    console.log(data);
-
-    this.service.getOneUser(data._id).subscribe(res=>{
-      console.log(res);
-      localStorage.setItem('currentUser',JSON.stringify(res));
-      this.toastr.success("Profile Updated Successfully!!")
-      this.service.sendMessage("true");
-          }, error => {
-            // console.log(error);
-            this.toastr.error('....', error.error.message);
-          })
- 
-  }, error => {
-    // console.log(error);
-    this.toastr.error('....', error.error.message);
-  })
-
-}
     this.dialogRef.close();
 // window.location.reload()
 
