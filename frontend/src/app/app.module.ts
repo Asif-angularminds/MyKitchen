@@ -68,6 +68,8 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { ViewDishComponent } from './view-dish/view-dish.component';
 import { AddDishFormComponent } from './add-dish-form/add-dish-form.component';
+import { SignUpVenderComponent } from './sign-up-vender/sign-up-vender.component';
+import { OrderVenderComponent } from './order-vender/order-vender.component';
 
 
 @NgModule({
@@ -95,6 +97,8 @@ import { AddDishFormComponent } from './add-dish-form/add-dish-form.component';
       AddAddressComponent,
       ShowOrdersToUserComponent,
       AddDishFormComponent,
+      SignUpVenderComponent,
+      OrderVenderComponent,
       // AddDishComponent,
       
   
@@ -104,6 +108,7 @@ import { AddDishFormComponent } from './add-dish-form/add-dish-form.component';
     BrowserModule,
     MatBadgeModule,
     MatSlideToggleModule,
+    
     MatButtonToggleModule,
     SocialLoginModule,
     MatTooltipModule,

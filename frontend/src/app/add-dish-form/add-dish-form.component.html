@@ -2,7 +2,7 @@
 
 <div class="padding">
           <div class="flex" style="padding-bottom: 0; margin-bottom: 0;">
-              <h1 >Add Dish</h1>
+              <h1 >{{head}}</h1>
               <img class="close" mat-button mat-dialog-close src="../../assets/images/cancel.png"/>
           </div>
           
@@ -13,7 +13,7 @@
           https://as2.ftcdn.net/v2/jpg/03/40/12/49/1000_F_340124934_bz3pQTLrdFpH92ekknuaTHy8JuXgG7fi.jpg
           -->
         <div style="display: flex">
-          <img src="{{imageUrl}}"  height="500" width="500" alt="">
+          <img src="{{imageUrl}}"  height="540" width="500" alt="">
           <form [formGroup]="post">
             <mat-card class="example-card" style="padding-left: 10px;">
              
@@ -32,7 +32,7 @@
                     
                         <mat-form-field appearance="outline" style="width:100%">
                           <mat-label>Price</mat-label>
-                          <input  matInput placeholder="pat@example.com" formControlName="price" required>
+                          <input type="number" matInput placeholder="pat@example.com" formControlName="price" required>
                           <mat-error *ngIf="post.invalid">	<mat-icon>warning</mat-icon> {{getErrorMessage()}}</mat-error>
                         </mat-form-field>
                        
@@ -67,7 +67,7 @@
             
           
           
-                            <button [disabled]="!post.valid" mat-flat-button color="primary" style="padding: 5px 15px; margin-left: 70%; margin-bottom: 14px;" (click)="submitform()">Add Dish</button>
+                            <button [disabled]="!post.valid" mat-flat-button color="primary" style="padding: 5px 15px; margin-left: 70%; margin-bottom: 14px;" (click)="submitform()">{{head}}</button>
                       
                       
                         

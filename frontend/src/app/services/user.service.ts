@@ -28,9 +28,13 @@ getUser(){
  getOneUser(id:any){
   return this.http.get<any>(this.baseUrl+this.userUrl+"/"+id)
  }
- postUser(body:any){
-   return this.http.post<any>(this.baseUrl+this.authUrl+"/register",body)
+ postVender(body:any){
+   return this.http.post<any>(this.baseUrl+this.authUrl+"/registerVender",body)
  }
+
+ postUser(body:any){
+  return this.http.post<any>(this.baseUrl+this.authUrl+"/register",body)
+}
  postGoogleUser(body:any){
   return this.http.post<any>(this.baseUrl+this.authUrl+'/google',body)
 }
@@ -71,11 +75,20 @@ verifyMail(token:any){
 // *********************************************************************************************************
 //                                    DISH API
 // *********************************************************************************************************
-getDish(){
-  return this.http.get<any>(this.baseUrl+this.dishUrl+"?sortBy=_id:desc&limit=50")
- }
- postDish(body:any){
+postDish(body:any){
   return this.http.post<any>(this.baseUrl+this.dishUrl+"/",body)
+}
+getDish(){
+  return this.http.get<any>(this.baseUrl+this.dishUrl+"?sortBy=_id:desc&limit=100")
+ }
+ getOneDish(id:any){
+  return this.http.get<any>(this.baseUrl+this.dishUrl+"/"+id)
+}
+deleteDish(id:any){
+  return this.http.delete<any>(this.baseUrl+this.dishUrl+"/"+id)
+}
+updateDish(id:any,body:any){
+  return this.http.patch<any>(this.baseUrl+this.dishUrl+"/"+id,body)
 }
 // *********************************************************************************************************
 //                                    ORDER API

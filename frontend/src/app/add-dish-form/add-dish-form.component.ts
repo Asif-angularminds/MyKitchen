@@ -16,6 +16,7 @@ export class AddDishFormComponent implements OnInit {
   imageUrl: any = 'https://dominionmartialarts.com/wp-content/uploads/2017/04/default-image.jpg'
   photo: any;
   post!: FormGroup;
+  head:any="Add Dish"
   constructor(private toastr: ToastrService, 
     public dialogRef: MatDialogRef<HeaderComponent>,
      private formBuilder: FormBuilder,  @Inject(MAT_DIALOG_DATA) public feeds: {name: any},private service: UserService) { }
@@ -41,6 +42,7 @@ console.log(this.feeds.name);
 
 if(this.feeds.name)
 {
+  this.head="Update Dish"
   this.post = this.formBuilder.group({
     name: [this.feeds.name.name, [Validators.required]],
     price: [this.feeds.name.price, [Validators.required]],
@@ -88,30 +90,35 @@ if(this.feeds.name)
 
   }
   submitform() {
-    console.log(this.photo)
-    console.log(this.post.value);
-
-    if (this.photo) {
-      const formData: any = new FormData();
-      formData.append("name", this.post.value.name);
-      formData.append("photo", this.photo);
-      formData.append("price", this.post.value.price);
-      formData.append("status", this.post.value.status);
-      formData.append("type", this.post.value.type);
-      formData.append("description", this.post.value.description);
+    const formData: any = new FormData();
+    formData.append("name", this.post.value.name);
+    if(this.photo)formData.append("photo", this.photo);
+    formData.append("price", this.post.value.price);
+    formData.append("status", this.post.value.status);
+    formData.append("type", this.post.value.type);
+    formData.append("description", this.post.value.description);
+    
+    
+    if(this.feeds?.name){
+    
+      this.service.updateDish(this.feeds.name._id,formData).subscribe(data=>{
+        console.log(data);})
+      }
+    else{
+console.log("hello");
 
       this.service.postDish(formData).subscribe(data=>{
-        console.log(data);
-        
-      })
+        console.log(data);})
+      }
+
+      this.service.getDish().subscribe(data=>{
+        console.log(data);})
 
 
-
-
-    }
+  this.service.sendMessage('addDish');
 
     this.dialogRef.close();
-    // window.location.reload()
+   
 
 
   }

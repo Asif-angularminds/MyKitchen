@@ -21,11 +21,27 @@ dishs:any[]=[]
 dataSource:any
 currentUser:any={}
   ngOnInit(){
-
+this.userService.getMessage().subscribe(res=>{
+  if(res=='addDish'){
+    // console.log(res);
+    this.userService.getDish().subscribe(data=>{
+      // console.log(data.results);
+      
+      this.dishs=data.results.reverse();
+      this.dishs= this.dishs.filter(obj=>obj._vender._id==this.currentUser._id)
+      this.dataSource = new MatTableDataSource<any>(this.dishs);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    })
+   
+    
+  }
+  
+});
     (localStorage.getItem('currentUser'))?this.currentUser=JSON.parse(localStorage.getItem('currentUser')!):"";
     this.userService.getDish().subscribe(data=>{
       this.dishs=data.results.reverse();
-      console.log(this.dishs);
+      this.dishs= this.dishs.filter(obj=>obj._vender._id==this.currentUser._id)
       this.dataSource = new MatTableDataSource<any>(this.dishs);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
@@ -52,6 +68,18 @@ currentUser:any={}
     }
   }
   delete(element:any){
+
+    this.userService.deleteDish(element._id).subscribe(data=>{
+      this.userService.getDish().subscribe(data=>{
+        
+        
+        this.dishs=data.results.reverse();
+        this.dishs= this.dishs.filter(obj=>obj._vender._id==this.currentUser._id)
+        this.dataSource = new MatTableDataSource<any>(this.dishs);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      })
+    })
 
   }
   openDialog() {

@@ -5,11 +5,11 @@ import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../services/user.service';
 
 @Component({
-  selector: 'app-sign-up',
-  templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.scss']
+  selector: 'app-sign-up-vender',
+  templateUrl: './sign-up-vender.component.html',
+  styleUrls: ['./sign-up-vender.component.scss']
 })
-export class SignUpComponent implements OnInit  {
+export class SignUpVenderComponent implements OnInit  {
   hide = true;
   show=false
   signUpForm!:FormGroup;
@@ -23,6 +23,7 @@ export class SignUpComponent implements OnInit  {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       password: ['', Validators.required],
+      shopName: ['', Validators.required],
     
     });
   }
@@ -37,7 +38,7 @@ export class SignUpComponent implements OnInit  {
  signup(){
    console.log(this.signUpForm.value);
    
-  this.auth.postUser(this.signUpForm.value).subscribe((data:any)=>{
+  this.auth.postVender(this.signUpForm.value).subscribe((data:any)=>{
      this.signUpForm.reset()
      this.toastr.success('...', 'Successfully Signup! ');
      this.router.navigate(["/login"])
@@ -52,10 +53,7 @@ export class SignUpComponent implements OnInit  {
 
     }
 
-    goToVender(){
-  this.router.navigate(["/signup-vender"])
 
-    }
 goToLogin(){
   this.router.navigate(["/login"])
    }

@@ -77,6 +77,7 @@ const google = catchAsync(async (req, res) => {
       ...req.body,
       name : req.body.firstName+" "+req.body.lastName,
       isEmailVerified:true,
+      role:"user",
     });
   } catch (e) {
     // await org.remove();

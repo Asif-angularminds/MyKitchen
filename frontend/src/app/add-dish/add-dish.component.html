@@ -59,7 +59,7 @@
             <!-- Symbol Column -->
             <ng-container matColumnDef="action">
               <th mat-header-cell *matHeaderCellDef> Action  </th>
-              <td mat-cell *matCellDef="let element"> <mat-icon  (click)="openDialogs(element)" style="color: rgb(0, 174, 255);   font-size: 25px;">edit</mat-icon>  <mat-icon  (click)="delete(element)" style="color: red;   font-size: 25px;">delete</mat-icon> </td>
+              <td mat-cell *matCellDef="let element">  <mat-icon  (click)="openDialogs(element)" style="color: rgb(0, 174, 255);   font-size: 25px;">edit</mat-icon>  <mat-icon  (click)="delete(element)" style="color: red;   font-size: 25px;">delete</mat-icon> </td>
             </ng-container>
         
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

@@ -109,8 +109,8 @@ export class AddToCartComponent implements AfterViewInit, OnInit {
     this.arr.filter(obj => {
       if (JSON.stringify(obj._id) == JSON.stringify(element._id)) {
         obj.quantity++;
-        obj.total = obj.quantity * obj.price;
-        this.finalTotal = this.finalTotal + JSON.parse(obj.price);
+        obj.total += JSON.parse(obj.price);
+        this.finalTotal += JSON.parse(obj.price);
       }
     });
     this.arr[this.arr.length-1].total=this.finalTotal

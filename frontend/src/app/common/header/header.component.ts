@@ -77,6 +77,11 @@ nav:any
   openaddToCart(){
     this.router.navigate(["addToCart"]);  
   }
+  openVenderOrder(){
+    this.router.navigate(["showVenderOrders"]);  
+  }
+
+  
   openhome(){
     this.userService.sendMessage("home");
     this.router.navigate([""]);
@@ -96,5 +101,8 @@ nav:any
   this.router.navigate(['showUserOrders'])
  }
 
+scrollDish(){
+  this.router.navigate(['dish'])
+ }
   }
   

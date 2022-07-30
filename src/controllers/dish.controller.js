@@ -12,7 +12,7 @@ const {productService,dishService} = require('../services');
 
 const createDish = catchAsync(async (req, res) => {
   
-  const dish = await dishService.createProduct({   
+  const dish = await dishService.createDish({   
     ...req.body,
     _vender:req.user._id,
     photo: req.files.map(({ filename, path }) => ({ filename, path:'http://localhost:8081/images/'+filename }))
@@ -29,7 +29,7 @@ const getDishs = catchAsync(async (req, res) => {
     ...options,
       populate: [{
       path: "_vender",
-      select: "_id name photo firstName"
+      select: "_id name photo firstName shopName"
     }]
    });
   res.send(result);
@@ -42,7 +42,7 @@ const getDish = catchAsync(async (req, res) => {
   const dish = await (await dishService.getDishById(req.params.dishId))
   .populate([{
     path: "_vender",
-    select: "_id name photo firstName"
+    select: "_id name photo firstName shopName"
   }]);
   if (!dish) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Product not found');

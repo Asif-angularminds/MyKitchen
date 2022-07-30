@@ -21,6 +21,8 @@
     "@angular/platform-browser-dynamic": "~13.2.0",
     "@angular/router": "~13.2.0",
     "@ctrl/ngx-emoji-mart": "^6.2.0",
+    "@fortawesome/angular-fontawesome": "^0.11.1",
+    "@fortawesome/fontawesome": "^1.1.8",
     "@ngmodule/material-carousel": "^0.6.0",
     "angular-responsive-carousel": "^2.1.2",
     "angularx-social-login": "^4.1.0",

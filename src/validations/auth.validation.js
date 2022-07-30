@@ -21,7 +21,7 @@ const registerVender = {
     lastName: Joi.string().required(),
     role:Joi.string(),
     name:Joi.string(),
-    company: Joi.string().required()
+    shopName: Joi.string().required()
   }),
 };
 const google = {
