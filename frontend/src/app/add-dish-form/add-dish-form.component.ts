@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, FormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CountryISO, PhoneNumberFormat, SearchCountryField } from 'ngx-intl-tel-input';
 import { ToastrService } from 'ngx-toastr';
@@ -15,11 +15,11 @@ export class AddDishFormComponent implements OnInit {
   hide = true;
   imageUrl: any = 'https://dominionmartialarts.com/wp-content/uploads/2017/04/default-image.jpg'
   photo: any;
-  post!: FormGroup;
+  post!: UntypedFormGroup;
   head:any="Add Dish"
   constructor(private toastr: ToastrService, 
     public dialogRef: MatDialogRef<HeaderComponent>,
-     private formBuilder: FormBuilder,  @Inject(MAT_DIALOG_DATA) public feeds: {name: any},private service: UserService) { }
+     private formBuilder: UntypedFormBuilder,  @Inject(MAT_DIALOG_DATA) public feeds: {name: any},private service: UserService) { }
 
 
 

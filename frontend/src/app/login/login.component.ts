@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, FormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 // import { stringify } from 'querystring';
 import { AuthService } from '../services/auth.service';
@@ -14,10 +14,10 @@ import { GoogleLoginProvider, SocialAuthService } from 'angularx-social-login';
 export class LoginComponent implements OnInit {
   hide = true;
   show = false
-  loginForm!: FormGroup;
+  loginForm!: UntypedFormGroup;
   token: any;
   googleUser: any
-  constructor(private socialAuthService: SocialAuthService, private toastr: ToastrService, private formBuilder: FormBuilder, private auth: UserService, private router: Router) { }
+  constructor(private socialAuthService: SocialAuthService, private toastr: ToastrService, private formBuilder: UntypedFormBuilder, private auth: UserService, private router: Router) { }
 
   ngOnInit(): void {
 

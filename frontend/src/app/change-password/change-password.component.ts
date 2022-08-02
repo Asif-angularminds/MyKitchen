@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -14,10 +14,10 @@ import { UserService } from '../services/user.service';
 })
 export class ChangePasswordComponent implements OnInit  {
   hide = true;
-  loginForm!:FormGroup;
+  loginForm!:UntypedFormGroup;
   token :any;
   currentUser:any;
-  constructor(private toastr: ToastrService,public dialogRef: MatDialogRef<HeaderComponent>,private formBuilder:FormBuilder,private service:UserService,private router:Router) { }
+  constructor(private toastr: ToastrService,public dialogRef: MatDialogRef<HeaderComponent>,private formBuilder:UntypedFormBuilder,private service:UserService,private router:Router) { }
 
   ngOnInit(): void {
     (localStorage.getItem("currentUser"))?this.currentUser=JSON.parse(localStorage.getItem("currentUser")!):""

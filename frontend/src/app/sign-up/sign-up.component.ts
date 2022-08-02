@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, FormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../services/user.service';
@@ -12,9 +12,9 @@ import { UserService } from '../services/user.service';
 export class SignUpComponent implements OnInit  {
   hide = true;
   show=false
-  signUpForm!:FormGroup;
+  signUpForm!:UntypedFormGroup;
   token :any;
-  constructor(private toastr: ToastrService,private formBuilder:FormBuilder,private auth:UserService,private router:Router) { }
+  constructor(private toastr: ToastrService,private formBuilder:UntypedFormBuilder,private auth:UserService,private router:Router) { }
 
   ngOnInit(): void {
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { CountryISO, PhoneNumberFormat, SearchCountryField } from 'ngx-intl-tel-input';
 import { ToastrService } from 'ngx-toastr';
@@ -17,8 +17,8 @@ export class ProfileComponent implements OnInit{
   hide = true;
   imageUrl:any='https://as2.ftcdn.net/v2/jpg/03/40/12/49/1000_F_340124934_bz3pQTLrdFpH92ekknuaTHy8JuXgG7fi.jpg'
   photo:any;
-  post!:FormGroup;
-  constructor(private toastr: ToastrService,public dialogRef: MatDialogRef<HeaderComponent>,private formBuilder:FormBuilder,private service:UserService) { }
+  post!:UntypedFormGroup;
+  constructor(private toastr: ToastrService,public dialogRef: MatDialogRef<HeaderComponent>,private formBuilder:UntypedFormBuilder,private service:UserService) { }
 currentUser:any;
 da:any 
   ngOnInit(): void {
@@ -48,7 +48,7 @@ da:any
     console.log();
 
     this.post.patchValue(this.currentUser)
-    this.da= new FormControl(new Date(this.currentUser.dob));
+    this.da= new UntypedFormControl(new Date(this.currentUser.dob));
   
 
    

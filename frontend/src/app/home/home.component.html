@@ -1,15 +1,7 @@
-<!-- <carousel   style="z-index: 0 !important; margin-top: 4%;" 
-            [images]="feed"
-            [objectFit]="'cover'"
-            [cellWidth]="'100%'"
-            [height]="450"
-            
-            [autoplay]="true"
-            [dots]="true"
-            [loop]="true"
-            [counter]="true"
-            [cellsToShow]="1" >
-          </carousel> -->
+
+
+
+
 <carousel style="z-index: 0 !important; margin-top: 4%;" class="carousel-html-content" [objectFit]="'cover'"
   [cellWidth]="'100%'" [height]="650" [autoplay]="true" [dots]="true" [loop]="true" [counter]="false" [cellsToShow]="1">
   <div class="carousel-cell"
@@ -37,6 +29,7 @@
     <h1 style="color: white; font-size: 140px;">Pasta</h1>
   </div>
 </carousel>
+
  <div class="container" #order id="order">
   
 
@@ -52,7 +45,9 @@
     <mat-button-toggle  value="non-veg">Non-Veg</mat-button-toggle>
   
   </mat-button-toggle-group>
+
      <ng-container *ngFor="let dish of dishs; index as i">
+      
      <mat-card class="example-card">
   
        <img mat-card-image
@@ -81,5 +76,70 @@
    </ng-container>
   </div>
 
+
+</div>
+
+
+
+
+<!-- vendor -->
+<div style="display: flex;">
+<div class="flex">
+  <div class="flex-item">
+    <div style="display: block;">
+    <canvas baseChart width="400" height="400"
+                [data]="lineChartData"
+                [options]="lineChartOptions"
+                [type]="lineChartType"
+                (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)"></canvas>
+    </div>
+  </div>
+  <div class="flex-item">
+    <table class="table table-responsive table-condensed">
+      <tr>
+        <th *ngFor="let label of lineChartData.labels">{{label}}</th>
+      </tr>
+      <tr *ngFor="let d of lineChartData.datasets; let i=index" [class]="'line-'+i">
+        <td *ngFor="let label of lineChartData.labels; let j=index">{{d && d.data[j]}}</td>
+      </tr>
+    </table>
+    <div class="button-row">
+      <button mat-button mat-raised-button color="primary" (click)="randomize()">Randomize</button>
+      <button mat-button mat-raised-button color="primary" (click)="pushOne()">Push</button>
+      <button mat-button mat-raised-button color="primary" (click)="changeColor()">Recolor</button>
+      <button mat-button mat-raised-button color="primary" (click)="hideOne()">Toggle Series B</button>
+      <button mat-button mat-raised-button color="primary" (click)="changeLabel()">Change Label</button>
+    </div>
+  </div>
+
+</div>
+
+<div>
+  <div>
+    <div>
+      <div style="display: block">
+        <canvas baseChart [data]="barChartData" [options]="barChartOptions"
+          [type]="barChartType" (chartHover)="chartHovered($event)"
+          (chartClick)="chartClicked($event)"></canvas>
+      </div>
+      <button mat-button mat-raised-button color="primary" (click)="randomize()">Update</button>
+    </div>
+  </div>
+</div>
+
+
+
+<div>
+  <div>
+    <div style="display: block">
+      <canvas baseChart
+        [data]="doughnutChartData"
+
+        [type]="doughnutChartType">
+      </canvas>
+    </div>
+  </div>
+</div>
 
 </div>

@@ -70,7 +70,7 @@ import { ViewDishComponent } from './view-dish/view-dish.component';
 import { AddDishFormComponent } from './add-dish-form/add-dish-form.component';
 import { SignUpVenderComponent } from './sign-up-vender/sign-up-vender.component';
 import { OrderVenderComponent } from './order-vender/order-vender.component';
-
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -108,11 +108,12 @@ import { OrderVenderComponent } from './order-vender/order-vender.component';
     BrowserModule,
     MatBadgeModule,
     MatSlideToggleModule,
-    
+    NgChartsModule,
     MatButtonToggleModule,
     SocialLoginModule,
     MatTooltipModule,
     PickerModule,
+  
     MatGridListModule,
     NgxIntlTelInputModule,
     MatProgressBarModule,

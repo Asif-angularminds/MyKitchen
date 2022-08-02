@@ -7,7 +7,11 @@ import { ViewDishComponent } from '../view-dish/view-dish.component';
 import { ProfileComponent } from '../profile/profile.component';
 import { UserService } from '../services/user.service';
 import { ViewCommentComponent } from '../view-comment/view-comment.component';
+import { Chart, ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
+import { BaseChartDirective } from 'ng2-charts';
 
+import {default as Annotation} from 'chartjs-plugin-annotation';
+// import {DataLabelsPlugin} from 'chartjs-plugin-datalabels';
 
 
 @Component({
@@ -27,7 +31,9 @@ export class HomeComponent implements OnInit {
   imgIterate:number[]=[]
   currentUser:any;
   temp:any[]=[]
-    constructor(public dialog: MatDialog,private toastr: ToastrService,private userService:UserService) { }
+    constructor(public dialog: MatDialog,private toastr: ToastrService,private userService:UserService) { 
+      Chart.register(Annotation)
+    }
 
     @ViewChild("order") order!: HTMLElement;
   ngOnInit(): void {
@@ -122,5 +128,222 @@ filter(event:any){
   else
   this.dishs=this.temp;
 }
+
+
+//chart
+public doughnutChartLabels: string[] = [ 'Download Sales', 'In-Store Sales', 'Mail-Order Sales' ];
+  public doughnutChartData: ChartData<'doughnut'> = {
+    labels: this.doughnutChartLabels,
+    datasets: [
+      { data: [ 350, 450, 100 ] },
+      { data: [ 50, 150, 120 ] },
+      { data: [ 250, 130, 70 ] }
+    ]
+  };
+  public doughnutChartType: ChartType = 'doughnut';
+
+  // events
+  // public chartClicked({ event, active }: { event: ChartEvent, active: {}[] }): void {
+  //   console.log(event, active);
+  // }
+
+  public chartHovered({ event, active }: { event: ChartEvent, active: {}[] }): void {
+    console.log(event, active);
+  }
+
+
+  //bar
+  @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
+
+  public barChartOptions: ChartConfiguration['options'] = {
+    elements: {
+      line: {
+        tension: 0.4
+      }
+    },
+    // We use these empty structures as placeholders for dynamic theming.
+    scales: {
+      x: {},
+      y: {
+        min: 10
+      }
+    },
+    plugins: {
+      legend: { display: true },
+    }
+  };
+  public barChartLabels: string[] = [ '2006', '2007', '2008', '2009', '2010', '2011', '2012' ];
+  public barChartType: ChartType = 'bar';
+
+  public barChartData: ChartData<'bar'> = {
+    labels: this.barChartLabels,
+    datasets: [
+      { data: [ 65, 59, 80, 81, 56, 55, 40 ], label: 'Series A' },
+      { data: [ 28, 48, 40, 19, 86, 27, 90 ], label: 'Series B' }
+    ]
+  };
+
+  // events
+  public chartClicked({ event, active }: { event?: ChartEvent, active?: {}[] }): void {
+    console.log(event, active);
+  }
+
+  // public chartHovered({ event, active }: { event?: ChartEvent, active?: {}[] }): void {
+  //   console.log(event, active);
+  // }
+
+  public randomize(): void {
+    this.barChartType = this.barChartType === 'bar' ? 'line' : 'bar';
+  }
+
+///line
+
+
+
+public lineChartData: ChartConfiguration['data'] = {
+  datasets: [
+    {
+      data: [ 0,0,0,0,0,0,5, 7,],
+      label: 'Series A',
+      backgroundColor: 'rgba(148,159,177,0.2)',
+      borderColor: 'rgba(148,159,177,1)',
+      pointBackgroundColor: 'rgba(148,159,177,1)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(148,159,177,0.8)',
+      fill: 'origin',
+    },
+    {
+      data: [ 0,0,0,0,0,0,8, 10,],
+      label: 'Series B',
+      backgroundColor: 'rgba(77,83,96,0.2)',
+      borderColor: 'rgba(77,83,96,1)',
+      pointBackgroundColor: 'rgba(77,83,96,1)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(77,83,96,1)',
+      fill: 'origin',
+    },
+    {
+      data: [ 0,0,0,0,0,0,3, 6,],
+      label: 'Series C',
+      yAxisID: 'y-axis-1',
+      backgroundColor: 'rgba(255,0,0,0.3)',
+      borderColor: 'red',
+      pointBackgroundColor: 'rgba(148,159,177,1)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(148,159,177,0.8)',
+      fill: 'origin',
+    }
+  ],
+  labels: [ 'January','February','March','April','May','June','July', 'August', 'September', 'October', 'November', 'December' ]
+};
+
+public lineChartOptions: ChartConfiguration['options'] = {
+  elements: {
+    line: {
+      tension: 0.5
+    }
+  },
+  scales: {
+    // We use this empty structure as a placeholder for dynamic theming.
+    x: {},
+    'y-axis-0':
+      {
+        position: 'left',
+      },
+    'y-axis-1': {
+      position: 'right',
+      grid: {
+        color: 'rgba(255,0,0,0.3)',
+      },
+      ticks: {
+        color: 'red'
+      }
+    }
+  },
+
+  plugins: {
+    legend: { display: true },
+    annotation: {
+      annotations: [
+        {
+          type: 'line',
+          scaleID: 'x',
+          value: 'March',
+          borderColor: 'orange',
+          borderWidth: 2,
+          label: {
+            position: 'center',
+            //  enabled: true,
+            color: 'orange',
+            content: 'LineAnno',
+            font: {
+              weight: 'bold'
+            }
+          }
+        },
+      ],
+    }
+  }
+};
+
+public lineChartType: ChartType = 'line';
+
+// @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
+
+private static generateNumber(i: number): number {
+  return Math.floor((Math.random() * (i < 2 ? 100 : 1000)) + 1);
+}
+
+// public randomize(): void {
+//   for (let i = 0; i < this.lineChartData.datasets.length; i++) {
+//     for (let j = 0; j < this.lineChartData.datasets[i].data.length; j++) {
+//       this.lineChartData.datasets[i].data[j] = LineChartComponent.generateNumber(i);
+//     }
+//   }
+//   this.chart?.update();
+// }
+
+// events
+// public chartClicked({ event, active }: { event?: ChartEvent, active?: {}[] }): void {
+//   console.log(event, active);
+// }
+
+// public chartHovered({ event, active }: { event?: ChartEvent, active?: {}[] }): void {
+//   console.log(event, active);
+// }
+
+public hideOne(): void {
+  const isHidden = this.chart?.isDatasetHidden(1);
+  this.chart?.hideDataset(1, !isHidden);
+}
+
+public pushOne(): void {
+  this.lineChartData.datasets.forEach((x, i) => {
+    const num = HomeComponent.generateNumber(i);
+    x.data.push(num);
+  });
+  this.lineChartData?.labels?.push(`Label ${ this.lineChartData.labels.length }`);
+
+  this.chart?.update();
+}
+
+public changeColor(): void {
+  this.lineChartData.datasets[2].borderColor = 'green';
+  this.lineChartData.datasets[2].backgroundColor = `rgba(0, 255, 0, 0.3)`;
+
+  this.chart?.update();
+}
+
+public changeLabel(): void {
+  if (this.lineChartData.labels) {
+    this.lineChartData.labels[2] = [ '1st Line', '2nd Line' ];
+  }
+
+  this.chart?.update();
+}
+
 }
  

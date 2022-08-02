@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, Inject, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { CountryISO, PhoneNumberFormat, SearchCountryField } from 'ngx-intl-tel-input';
 import { UserService } from '../services/user.service';
 import { SwiperComponent } from "swiper/angular";
@@ -42,10 +42,10 @@ export class AddNewPostComponent implements OnInit {
   time: number = 0;
   display: any;
   interval: any;
-  constructor( private toastr: ToastrService,public dialogRef: MatDialogRef<HeaderComponent>, private cf: ChangeDetectorRef, private formBuilder: FormBuilder, private service: UserService, private router: Router) { }
+  constructor( private toastr: ToastrService,public dialogRef: MatDialogRef<HeaderComponent>, private cf: ChangeDetectorRef, private formBuilder: UntypedFormBuilder, private service: UserService, private router: Router) { }
   public file: any;
   imgBaseUrl = ""
-  post!: FormGroup;
+  post!: UntypedFormGroup;
   urls: any[] = [];
   currentUser: any = [];
   savePost = false
@@ -64,16 +64,16 @@ export class AddNewPostComponent implements OnInit {
 
     });
   }
-  name = new FormControl('', [Validators.required, Validators.minLength(6)]);
-  bio = new FormControl('', [Validators.required, Validators.minLength(6)]);
-  gender = new FormControl('', [Validators.required, Validators.minLength(6)]);
+  name = new UntypedFormControl('', [Validators.required, Validators.minLength(6)]);
+  bio = new UntypedFormControl('', [Validators.required, Validators.minLength(6)]);
+  gender = new UntypedFormControl('', [Validators.required, Validators.minLength(6)]);
 
-  dob = new FormControl('', [Validators.required]);
+  dob = new UntypedFormControl('', [Validators.required]);
 
-  email = new FormControl('', [Validators.required, Validators.email]);
+  email = new UntypedFormControl('', [Validators.required, Validators.email]);
 
 
-  password = new FormControl('', [Validators.required, Validators.minLength(6)]);
+  password = new UntypedFormControl('', [Validators.required, Validators.minLength(6)]);
 
   getErrorMessage() {
     if (this.email.hasError('required')) {
@@ -87,8 +87,8 @@ export class AddNewPostComponent implements OnInit {
   CountryISO = CountryISO;
   PhoneNumberFormat = PhoneNumberFormat;
   preferredCountries: CountryISO[] = [CountryISO.UnitedStates, CountryISO.UnitedKingdom];
-  phoneForm = new FormGroup({
-    phone: new FormControl(undefined, [Validators.required])
+  phoneForm = new UntypedFormGroup({
+    phone: new UntypedFormControl(undefined, [Validators.required])
   });
 
   changePreferredCountries() {

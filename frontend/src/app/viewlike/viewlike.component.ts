@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
@@ -12,7 +12,7 @@ import { ViewCommentComponent } from '../view-comment/view-comment.component';
 })
 export class ViewlikeComponent implements OnInit {
   
-  constructor(public dialog: MatDialog,public dialogRef: MatDialogRef<ViewCommentComponent>,@Inject(MAT_DIALOG_DATA) public feeds: {name: any}, private cf: ChangeDetectorRef,private formBuilder:FormBuilder,private service:UserService,private router:Router) { }
+  constructor(public dialog: MatDialog,public dialogRef: MatDialogRef<ViewCommentComponent>,@Inject(MAT_DIALOG_DATA) public feeds: {name: any}, private cf: ChangeDetectorRef,private formBuilder:UntypedFormBuilder,private service:UserService,private router:Router) { }
 comment:any;
   imgBaseUrl=""
 

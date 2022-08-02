@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { HomeComponent } from '../home/home.component';
@@ -18,7 +18,7 @@ export class AddAddressComponent implements  OnInit  {
   
   constructor(public dialog: MatDialog,public dialogRef: MatDialogRef<HomeComponent>,
      public dialogRef1: MatDialogRef<PostSavedComponent>,
-     @Inject(MAT_DIALOG_DATA) public feeds: {name: any}, private cf: ChangeDetectorRef,private formBuilder:FormBuilder,private service:UserService,private router:Router) { }
+     @Inject(MAT_DIALOG_DATA) public feeds: {name: any}, private cf: ChangeDetectorRef,private formBuilder:UntypedFormBuilder,private service:UserService,private router:Router) { }
 comment:any;
   imgBaseUrl=""
 
