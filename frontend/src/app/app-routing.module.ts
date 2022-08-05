@@ -23,6 +23,8 @@ const routes: Routes = [
   { path: 'savedPost', component: PostSavedComponent,canActivate:[AuthGuard] }, 
   { path: 'addToCart', component: AddToCartComponent,canActivate:[AuthGuard] }, 
   { path: 'showVenderOrders', component: OrderVenderComponent,canActivate:[AuthGuard] }, 
+  { path: 'showVenderOrders/:id', component: OrderVenderComponent,canActivate:[AuthGuard] }, 
+  
   { path: 'dish', component: AddDishComponent,canActivate:[AuthGuard] },  
   { path: 'showUserOrders', component: ShowOrdersToUserComponent,canActivate:[AuthGuard] },   
 

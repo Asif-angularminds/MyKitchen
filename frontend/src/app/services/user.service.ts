@@ -8,6 +8,9 @@ import { Observable, Subject } from 'rxjs';
 export class UserService  {
   baseUrl: any = "http://localhost:8081/"
   imageUrl: string = "http://192.168.0.120:8081/images/"
+    // baseUrl: any = ""
+    // imageUrl: string = "images/"
+
 
   authUrl:any="auth"
   userUrl:any="users"
@@ -99,6 +102,10 @@ postOrder(body:any){
 getOrder(){
   return this.http.get<any>(this.baseUrl+this.orderUrl+"?sortBy=_id:desc&limit=50");
 }
+
+updateOrder(id:any,body:any){
+  return this.http.patch<any>(this.baseUrl+this.orderUrl+"/"+id,body);
+}
 // *********************************************************************************************************
 //                                    FEED API
 // *********************************************************************************************************
@@ -149,14 +156,23 @@ showReply(id:any,cId:any){
 // *********************************************************************************************************
 private subject = new Subject<any>();
 private subject1 = new Subject<any>();
+private userSubject = new Subject<any>();
+private orderSubject = new Subject<any>();
 
 
-  sendMessage(message: string) {
+sendMessage(message: string) {
       this.subject.next(message);
   }
+  sendMessageUser(message: string) {
+    this.userSubject.next(message);
+}
+sendMessageOrder(message: string) {
+  this.orderSubject.next(message);
+}
   sendMessageToAddToCart(message: string) {
     this.subject1.next(message);
 }
+
   // clearMessages() {
   //     this.subject.next();
   // }
@@ -164,6 +180,12 @@ private subject1 = new Subject<any>();
   getMessage(): Observable<any> {
       return this.subject.asObservable();
   }
+  getMessageUser(): Observable<any> {
+    return this.userSubject.asObservable();
+}
+getMessageOrder(): Observable<any> {
+  return this.orderSubject.asObservable();
+}
   getMessageToAddToCart():Observable<any> {
     return this.subject1.asObservable();
 }

@@ -11,6 +11,7 @@ import { Chart, ChartConfiguration, ChartData, ChartEvent, ChartType } from 'cha
 import { BaseChartDirective } from 'ng2-charts';
 
 import {default as Annotation} from 'chartjs-plugin-annotation';
+import { Router } from '@angular/router';
 // import {DataLabelsPlugin} from 'chartjs-plugin-datalabels';
 
 
@@ -27,16 +28,55 @@ export class HomeComponent implements OnInit {
   feed:any[]=[]
   dishs:any[]=[]
   imgUrl:any
+  orders:any=[]
+  pending:any
+  cooking:any
+  completed:any
+  cancelled:any
   color: ThemePalette="accent"
   imgIterate:number[]=[]
   currentUser:any;
   temp:any[]=[]
-    constructor(public dialog: MatDialog,private toastr: ToastrService,private userService:UserService) { 
+    constructor(public dialog: MatDialog,private toastr: ToastrService,private userService:UserService, private router:Router) { 
       Chart.register(Annotation)
     }
 
     @ViewChild("order") order!: HTMLElement;
   ngOnInit(): void {
+
+    this.userService.getMessageUser().subscribe(data=>{
+      this.currentUser=(localStorage.getItem('currentUser'))?JSON.parse(localStorage.getItem('currentUser')!):"";
+
+   
+    })
+
+    this.currentUser=(localStorage.getItem('currentUser'))?JSON.parse(localStorage.getItem('currentUser')!):"";
+this.userService.getOrder().subscribe(data=>{
+    
+  this.orders=data.results;
+  console.log(this.orders);
+  this.orders=this.orders.map((obj:any)=>{
+    return ({
+      ...obj,
+      dishs: obj.dishs.filter((dish:any) => dish._vender._id === this.currentUser._id) 
+    })
+   });
+
+
+   this.orders=this.orders.filter((data:any)=>data.dishs.length!=0) 
+  //  for (let i = 0; i < this.orders.length; i++)(this.orders[i].dishs.length==0)?this.orders.splice(i,1):"";
+    
+ 
+   console.log(this.orders);
+   this.pending=this.orders.filter((data:any)=>data.status=='pending').length
+   this.cooking=this.orders.filter((data:any)=>data.status=='cooking').length
+   this.completed=this.orders.filter((data:any)=>data.status=='completed').length
+   this.cancelled=this.orders.filter((data:any)=>data.status=='cancelled').length
+
+ })
+
+
+
 this.userService.getDish().subscribe(data=>{
   console.log(data.results);
   this.dishs=data.results;
@@ -79,6 +119,21 @@ if(data=='home'){
         path:"../../../assets/images/banner3.jpg",
       }
     ]
+
+for (let i = 0; i < 7; i++) {
+
+  
+  const yesterday = new Date(this.date)  
+  yesterday.setDate(yesterday.getDate() - i)
+  var dd = String(yesterday.getDate()).padStart(2, '0');
+var mm = String(yesterday.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = yesterday.getFullYear();
+let today = dd + '/' + mm + '/' + yyyy;
+  // yesterday.toDateString()
+  this.barChartLabels.unshift(today)
+  
+}
+
   }
   goToBottom(){
     window.scrollTo(0,document.body.scrollHeight);
@@ -172,14 +227,16 @@ public doughnutChartLabels: string[] = [ 'Download Sales', 'In-Store Sales', 'Ma
       legend: { display: true },
     }
   };
-  public barChartLabels: string[] = [ '2006', '2007', '2008', '2009', '2010', '2011', '2012' ];
+
+  public date=new Date();
+  public barChartLabels: any[] = [];
   public barChartType: ChartType = 'bar';
 
   public barChartData: ChartData<'bar'> = {
     labels: this.barChartLabels,
     datasets: [
-      { data: [ 65, 59, 80, 81, 56, 55, 40 ], label: 'Series A' },
-      { data: [ 28, 48, 40, 19, 86, 27, 90 ], label: 'Series B' }
+      { data: [ 65, 59, 80, 81, 56, 55, 40 ], label: 'No of orders per day' }
+      // { data: [ 28, 48, 40, 19, 86, 27, 90 ], label: 'Series B' }
     ]
   };
 
@@ -344,6 +401,12 @@ public changeLabel(): void {
 
   this.chart?.update();
 }
+orderStatus(data:any){
 
+  console.log(data);
+  // this.userService.sendMessageOrder(data);
+  this.router.navigate(['showVenderOrders',data])
+  
+}
 }
  

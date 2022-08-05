@@ -1,7 +1,7 @@
 
 
 
-
+<ng-container *ngIf="currentUser?.role=='user'">
 <carousel style="z-index: 0 !important; margin-top: 4%;" class="carousel-html-content" [objectFit]="'cover'"
   [cellWidth]="'100%'" [height]="650" [autoplay]="true" [dots]="true" [loop]="true" [counter]="false" [cellsToShow]="1">
   <div class="carousel-cell"
@@ -79,11 +79,22 @@
 
 </div>
 
-
+</ng-container>
 
 
 <!-- vendor -->
-<div   style="text-align: right; align-items: center !important; justify-content: center; width: 100%; margin-left: 10%;" >
+
+<ng-container *ngIf="currentUser?.role=='vender'">
+  <h1 style="margin: 5% 0 0 8%;">Order Status</h1>
+  <div style="margin:0% 8% 0 8% " >
+  <mat-grid-list cols="4" rowHeight="2:1">
+    <mat-grid-tile><div> <button (click)="orderStatus('completed')"  class="venderBtn" mat-raised-button style="background-color: rgb(114, 241, 131);">{{completed}} <img   src="../../../assets/images/done.svg" height="40" alt=""> </button> <br><br> <span style="font-size: 16px !important;"> Completed Orders</span></div></mat-grid-tile>
+    <mat-grid-tile><div> <button  (click)="orderStatus('cooking')" class="venderBtn" mat-raised-button style="background-color: rgb(241, 103, 168);">{{cooking}} <img   src="../../../assets/images/cook.svg" height="40" alt=""></button><br> <br> <span style="font-size: 16px !important;"> Cooking Orders</span></div></mat-grid-tile>
+    <mat-grid-tile><div> <button  (click)="orderStatus('pending')" class="venderBtn" mat-raised-button  style="background-color: rgb(113, 168, 240);">{{pending}} <img   src="../../../assets/images/pending.svg" height="40" alt=""></button><br> <br> <span style="font-size: 16px !important;"> Pending Orders</span></div></mat-grid-tile>
+    <mat-grid-tile><div> <button   (click)="orderStatus('cancelled')" class="venderBtn" mat-raised-button style="background-color: rgb(241, 81, 70);" >{{cancelled}} <img   src="../../../assets/images/cancel.svg" height="40" alt=""></button><br><br> <span style="font-size: 16px !important;"> Cancelled Orders</span></div></mat-grid-tile>
+  </mat-grid-list>
+</div>
+<div    style="text-align: right; align-items: center !important; justify-content: center; max-width: 80%; margin: 0 0 0 12%; display: overflow;" >
 <!-- <div class="flex" style="width:600px !important; height: 200px !important;">
   <div class="flex-item">
     <div style="display: block;">
@@ -116,9 +127,9 @@
 </div> -->
 
 <div style="max-height: 100px;">
-    <div style="width:60% !important; height: 200px !important;">
+    <div style="width:90% !important; ">
       <div >
-        <button mat-button mat-raised-button color="primary" (click)="randomize()">Update</button>
+        <button mat-button mat-raised-button  (click)="randomize()"><img   [src]="(barChartType=='bar')?'../../../assets/images/line.svg':'../../../assets/images/bar.svg'" height="30" alt=""> </button>
       <div style="display: block">
         <canvas baseChart [data]="barChartData" [options]="barChartOptions"
           [type]="barChartType" (chartHover)="chartHovered($event)"
@@ -142,3 +153,4 @@
 </div> -->
 
 </div>
+</ng-container>

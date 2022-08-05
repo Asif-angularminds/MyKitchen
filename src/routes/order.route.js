@@ -31,7 +31,7 @@ router
 router
   .route('/:orderId')
   .get(validate(orderValidation.getOrder), orderController.getOrder)
-  .patch(imageUpload.multipalImage, validate(productValidation.updateProduct), productController.updateProduct)
+  .patch(validate(orderValidation.updateOrder), orderController.updateOrder)
   .delete(validate(productValidation.deleteProduct), productController.deleteProduct);
 
 

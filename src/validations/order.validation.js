@@ -27,16 +27,13 @@ const getOrder = {
   }),
 };
 
-const updateProduct = {
+const updateOrder = {
   params: Joi.object().keys({
-    productId: Joi.required().custom(objectId),
+    orderId: Joi.required().custom(objectId),
   }),
   body: Joi.object()
     .keys({
-      caption: Joi.string().required(),
-      photo: Joi.string(),
-      like: Joi.string(),
-      comment: Joi.string(),
+      status: Joi.string(),
     })
     .min(1),
 };
@@ -116,7 +113,7 @@ module.exports = {
   getProducts,
   likeReply,
   getOrder,
-  updateProduct,
+  updateOrder,
   replyProduct,
   updateOrg,
   deleteProduct,

@@ -47,15 +47,15 @@ const getOrderById = async (id) => {
  * @param {Object} updateBody
  * @returns {Promise<User>}
  */
-const updateProductById = async (productId, productBody) => {
-  const product = await getProductById(productId);
-  if (!product) {
-    throw new ApiError(httpStatus.BAD_REQUEST, 'Product not found');
+const updateOrderById = async (orderId, orderBody) => {
+  const order = await getOrderById(orderId);
+  if (!order) {
+    throw new ApiError(httpStatus.BAD_REQUEST, 'Order not found');
   }
 
-  Object.assign(product, productBody);
-  await product.save();
-  return product;
+  Object.assign(order, orderBody);
+  await order.save();
+  return order;
 };
 
 
@@ -180,7 +180,7 @@ module.exports = {
   queryOrder,
   getOrderById,
 
-  updateProductById,
+  updateOrderById,
   showReplyProduct,
   deleteProductById,
 };

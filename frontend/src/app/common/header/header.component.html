@@ -28,6 +28,10 @@
       <img  src="../../../assets/images/list-solid.svg" height="20" alt="">
       
     </button> -->
+
+
+
+    <!---->
     <button *ngIf="currrntUser.role=='user'"  (click)="scrollOrderNow()" mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
       <img  [src]="(nav.url == '/showUserOrders')?'../../../assets/images/list-solid.svg':'../../../assets/images/list-ul-solid.svg'" height="23"  alt="">
     

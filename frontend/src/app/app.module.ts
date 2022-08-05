@@ -71,7 +71,7 @@ import { AddDishFormComponent } from './add-dish-form/add-dish-form.component';
 import { SignUpVenderComponent } from './sign-up-vender/sign-up-vender.component';
 import { OrderVenderComponent } from './order-vender/order-vender.component';
 import { NgChartsModule } from 'ng2-charts';
-
+import {MatSelectModule} from '@angular/material/select';
 @NgModule({
   declarations: [
   
@@ -105,6 +105,7 @@ import { NgChartsModule } from 'ng2-charts';
     ],
   
   imports: [
+    MatSelectModule,
     BrowserModule,
     MatBadgeModule,
     MatSlideToggleModule,

@@ -21,6 +21,15 @@ order:number=0
 nav:any
   ngOnInit(): void {
   this.nav=this.router
+this.userService.getMessageUser().subscribe(data=>{
+  this.currrntUser  =localStorage.getItem('currentUser') ? JSON.parse(localStorage.getItem('currentUser')!):"";
+console.log(this.currrntUser);
+    // (localStorage.getItem("currentUser"))?this.currrntUser=JSON.parse(localStorage.getItem("currentUser")!):"";
+    (this.currrntUser?.photo)?this.imageUrl=this.userService.imageUrl+this.currrntUser.photo:""
+
+})
+
+
   if(localStorage.getItem("order"))
   this.order=JSON.parse(localStorage.getItem("order")!).length
      this.userService.getMessage().subscribe(data=>{
@@ -33,13 +42,14 @@ nav:any
     if(data=='true')this.ngOnInit();
 
 });
-
-    (localStorage.getItem("currentUser"))?this.currrntUser=JSON.parse(localStorage.getItem("currentUser")!):"";
+this.currrntUser  =localStorage.getItem('currentUser') ? JSON.parse(localStorage.getItem('currentUser')!):"";
+console.log(this.currrntUser);
+    // (localStorage.getItem("currentUser"))?this.currrntUser=JSON.parse(localStorage.getItem("currentUser")!):"";
     (this.currrntUser?.photo)?this.imageUrl=this.userService.imageUrl+this.currrntUser.photo:""
 
-    let a:any[]=JSON.parse(localStorage.getItem("order")!);
-
-    (a.filter(obj=>obj.quantity=="Total Amount(₹)").length>0)?this.order=JSON.parse(localStorage.getItem("order")!).length-1:this.order=JSON.parse(localStorage.getItem("order")!).length
+    let a:any[]=[]
+    a=JSON.parse(localStorage.getItem("order")!);
+ if(a)(a.filter((obj:any)=>obj.quantity=="Total Amount(₹)").length>0)?this.order=JSON.parse(localStorage.getItem("order")!).length-1:this.order=JSON.parse(localStorage.getItem("order")!).length
 
 // this.userService.getOneUser(this.currrntUser._id).subscribe(data=>{
 

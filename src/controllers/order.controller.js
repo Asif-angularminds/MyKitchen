@@ -52,14 +52,10 @@ const getOrder = catchAsync(async (req, res) => {
   res.send(order);
 });
 
-const updateProduct = catchAsync(async (req, res) => {
-  const product = await (await productService.updateProductById(req.params.productId, {   
-    ...req.body,
-    
-    photo: req.files.map(({ filename, path }) => ({ filename, path:'http://192.168.0.120:8080/images/'+filename }))
-  }))
+const updateOrder = catchAsync(async (req, res) => {
+  const order = await (await orderService.updateOrderById(req.params.orderId, req.body))
     // .populate("_org", "_id name email");
-  res.send(product);
+  res.send(order);
 },{new:true});
 
 
@@ -119,7 +115,7 @@ module.exports = {
   commentProduct,
   getOrder,
   getOrders,
-  updateProduct,
+  updateOrder,
   deleteProduct,
   showReplyProduct,
   likeComment,

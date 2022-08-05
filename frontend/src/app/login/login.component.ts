@@ -48,10 +48,14 @@ export class LoginComponent implements OnInit {
 
         this.auth.getOneUser(data.user._id).subscribe(res => {
           console.log(res);
+          
           localStorage.setItem('currentUser', JSON.stringify(res));
+          this.auth.sendMessageUser("data");
 
         });
+
         this.toastr.success('Welcome', 'Successfully Login! ');
+
         this.router.navigate(['']);
         // this.toastr.success("Logged in successfully !!",data.message  )
       }
@@ -110,6 +114,7 @@ export class LoginComponent implements OnInit {
               this.auth.getOneUser(data.user._id).subscribe(res => {
                 console.log(res);
                 localStorage.setItem('currentUser', JSON.stringify(res));
+                this.auth.sendMessageUser("data");
 
               }, (error) => {
                 // console.log(error.error.message);
