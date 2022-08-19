@@ -7,7 +7,7 @@ import { Observable, Subject } from 'rxjs';
 })
 export class UserService  {
   baseUrl: any = "http://localhost:8081/"
-  imageUrl: string = "http://192.168.0.120:8081/images/"
+  imageUrl: any = "http://localhost:8081/images/"
     // baseUrl: any = ""
     // imageUrl: string = "images/"
 
@@ -122,7 +122,7 @@ getFeed(){
  postFeed(body:any){
    return this.http.post<any>(this.baseUrl+this.feedUrl,body)
  }
- 
+
  deleteFeed(body:any){
   return this.http.delete<any>(this.baseUrl+this.feedUrl+"/"+body)
 }

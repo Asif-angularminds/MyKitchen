@@ -20,48 +20,48 @@ export class ProfileComponent implements OnInit{
   post!:UntypedFormGroup;
   constructor(private toastr: ToastrService,public dialogRef: MatDialogRef<HeaderComponent>,private formBuilder:UntypedFormBuilder,private service:UserService) { }
 currentUser:any;
-da:any 
+da:any
   ngOnInit(): void {
-    
+
     (localStorage.getItem("currentUser"))?this.currentUser=JSON.parse(localStorage.getItem("currentUser")!):"";
-(this.currentUser.photo)?this.imageUrl=this.service.imageUrl+this.currentUser.photo:""
-    
+    if(this.currentUser.photo) this.imageUrl=this.service.imageUrl+this.currentUser.photo;
+
     this.post = this.formBuilder.group({
       name :['', [Validators.required]],
       bio :['', [Validators.required]],
       gender:['', [Validators.required]],
-      
+
       dob:['', []],
       address:['', [Validators.required]],
-      
-        email :['', [Validators.required,Validators.email]],
-       
-        mobile :['', [Validators.required,Validators.minLength(6)]],
-       
 
-     
-    
+        email :['', [Validators.required,Validators.email]],
+
+        mobile :['', [Validators.required,Validators.minLength(6)]],
+
+
+
+
     });
-  
+
     // console.log(this.da.value);
     // this.da.value=
     console.log();
 
     this.post.patchValue(this.currentUser)
     this.da= new UntypedFormControl(new Date(this.currentUser.dob));
-  
 
-   
-    
+
+
+
   }
-  
+
 
 
   getErrorMessage() {
-   
+
     return 'Enter Valid Details';
   }
- 
+
   separateDialCode = false;
   SearchCountryField = SearchCountryField;
   CountryISO = CountryISO;
@@ -82,30 +82,30 @@ da:any
         this.imageUrl = reader.result;
       };
     }
-    
+
 
   }
   submitform(){
     console.log(this.photo)
-    
-    
+
+
     console.log(this.post.value,this.photo)
 
     const formData:any=new FormData();
     let a=[];
     a=this.post.value.name.split(" ")
-    
+
     formData.append("firstName", a[0]);
     formData.append("lastName", a[1]);
     formData.append("email", this.post.value.email);
     formData.append("mobile", this.post.value.mobile.number);
     formData.append("photo", this.photo);
     formData.append("bio", this.post.value.bio);
-    formData.append("dob",  this.da.value); 
-    formData.append("gender", this.post.value.gender); 
-    formData.append("address", this.post.value.address);  
+    formData.append("dob",  this.da.value);
+    formData.append("gender", this.post.value.gender);
+    formData.append("address", this.post.value.address);
 
-  
+
 
     this.service.updateUserWithPic(this.currentUser._id,formData).subscribe(data=>{
       console.log(data);
@@ -119,14 +119,14 @@ da:any
               // console.log(error);
               this.toastr.error('....', error.error.message);
             })
-   
+
     }, error => {
       // console.log(error);
       this.toastr.error('....', error.error.message);
     })
 
 
-  
+
 
     this.dialogRef.close();
 // window.location.reload()

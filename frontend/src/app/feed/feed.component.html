@@ -1,11 +1,7 @@
 
 
 <div class="component">
-
-
-
-
-          <mat-card class="example-card" *ngFor="let feed of feeds; index as i; " >
+       <mat-card class="example-card" *ngFor="let feed of feeds; index as i; " >
             <mat-card-header>
             <ngx-skeleton-loader *ngIf="!contentLoaded" [theme]="{
               width: '490px',

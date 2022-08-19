@@ -51,7 +51,7 @@ const updateProduct = catchAsync(async (req, res) => {
   const product = await (await productService.updateProductById(req.params.productId, {   
     ...req.body,
     
-    photo: req.files.map(({ filename, path }) => ({ filename, path:'http://192.168.0.120:8080/images/'+filename }))
+    photo: req.files.map(({ filename, path }) => ({ filename, path:'http://localhost:8081/images/'+filename }))
   }))
     // .populate("_org", "_id name email");
   res.send(product);
